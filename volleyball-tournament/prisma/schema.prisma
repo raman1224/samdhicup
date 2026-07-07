@@ -1,0 +1,148 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  role          String    @default("admin")
+  isActive      Boolean   @default(true)
+  failedLogins  Int       @default(0)
+  lockedUntil   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  otps          OTP[]
+  auditLogs     AuditLog[]
+}
+
+model Tournament {
+  id            String    @id @default(cuid())
+  year          Int       @unique
+  name          String
+  description   String?
+  startDate     DateTime
+  endDate       DateTime
+  registrationFee Float
+  maxPlayers    Int       @default(10)
+  isActive      Boolean   @default(true)
+  venue         String?
+  rules         String?
+  prizePool     Float?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  teams         Team[]
+  announcements Announcement[]
+}
+
+model Team {
+  id              String        @id @default(cuid())
+  registrationId  String        @unique
+  teamName        String
+  teamLogo        String?
+  captainName     String
+  captainPhone    String
+  captainEmail    String
+  district        String
+  municipality    String
+  address         String
+  status          String        @default("pending")
+  rejectionReason String?
+  tournamentId    String
+  tournament      Tournament    @relation(fields: [tournamentId], references: [id])
+  payment         Payment?
+  players         Player[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([tournamentId])
+  @@index([status])
+  @@index([captainEmail])
+}
+
+model Player {
+  id                String   @id @default(cuid())
+  fullName          String
+  dateOfBirth       DateTime
+  age               Int
+  phoneNumber       String
+  address           String
+  jerseyName        String?
+  jerseyNumber      Int?
+  jerseySize        String?
+  position          String
+  passportPhoto     String?
+  citizenshipFront  String?
+  citizenshipBack   String?
+  teamId            String
+  team              Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([teamId])
+}
+
+model Payment {
+  id                String   @id @default(cuid())
+  transactionId     String
+  paymentMethod     String
+  amount            Float
+  screenshot        String?
+  status            String   @default("pending")
+  verifiedBy        String?
+  verifiedAt        DateTime?
+  rejectionReason   String?
+  teamId            String   @unique
+  team              Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model OTP {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  adminId   String
+  admin     Admin    @relation(fields: [adminId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([email, code])
+}
+
+model Announcement {
+  id           String     @id @default(cuid())
+  title        String
+  content      String
+  sentTo       String[]
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  createdAt    DateTime   @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  details   String?
+  adminId   String
+  admin     Admin    @relation(fields: [adminId], references: [id])
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
+
+model RateLimit {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  count     Int      @default(0)
+  expiresAt DateTime
+
+  @@index([key])
+}

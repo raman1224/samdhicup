@@ -1,0 +1,599 @@
+// import  prisma  from '@/lib/prisma'
+// import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+// import { Badge } from '@/components/ui/badge'
+// import { Button } from '@/components/ui/button'
+// import { getOptimizedImageUrl } from '@/lib/cloudinary-client'
+// import { 
+//   Users, Phone, Mail, MapPin, CreditCard, 
+//   User, Shirt, Calendar, Download, Check, X,
+//   ArrowLeft
+// } from 'lucide-react'
+// import Image from 'next/image'
+// import Link from 'next/link'
+// import { notFound } from 'next/navigation'
+
+// export const dynamic = 'force-dynamic'
+
+// async function getTeam(id: string) {
+//   if (!id) return null
+  
+//   try {
+//     return await prisma.team.findUnique({
+//       where: { id },
+//       include: {
+//         payment: true,
+//         players: {
+//           orderBy: { createdAt: 'asc' }
+//         },
+//       },
+//     })
+//   } catch (error) {
+//     console.error('Error fetching team:', error)
+//     return null
+//   }
+// }
+
+// export default async function TeamDetailPage({ 
+//   params 
+// }: { 
+//   params: Promise<{ id: string }> | { id: string } 
+// }) {
+//   // Handle both Promise and direct params (Next.js 15 compatibility)
+//   const resolvedParams = params instanceof Promise ? await params : params
+//   const id = resolvedParams?.id
+
+//   if (!id) {
+//     notFound()
+//   }
+
+//   const team = await getTeam(id)
+
+//   if (!team) {
+//     return (
+//       <div className="text-center py-20">
+//         <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+//         <p className="text-gray-400 text-lg">Team not found</p>
+//         <Link href="/admin/dashboard/teams" className="text-orange-400 hover:underline mt-2 inline-block">
+//           Back to Teams
+//         </Link>
+//       </div>
+//     )
+//   }
+
+//   return (
+//     <div className="space-y-6 max-w-5xl mx-auto">
+//       {/* Back button */}
+//       <Link 
+//         href="/admin/dashboard/teams" 
+//         className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+//       >
+//         <ArrowLeft className="w-4 h-4" />
+//         Back to Teams
+//       </Link>
+
+//       {/* Header */}
+//       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+//         <div className="flex items-center gap-4">
+//           {team.teamLogo ? (
+//             <Image 
+//               src={getOptimizedImageUrl(team.teamLogo, { width: 80, height: 80 })} 
+//               alt={team.teamName} 
+//               width={64} 
+//               height={64} 
+//               className="rounded-xl object-cover"
+//             />
+//           ) : (
+//             <div className="w-16 h-16 rounded-xl bg-gray-700 flex items-center justify-center">
+//               <Users className="w-8 h-8 text-gray-500" />
+//             </div>
+//           )}
+//           <div>
+//             <h1 className="text-2xl font-bold text-white">{team.teamName}</h1>
+//             <p className="text-gray-400">{team.registrationId} • {team.district}</p>
+//           </div>
+//         </div>
+//         <Badge className={`text-lg px-4 py-2 ${
+//           team.status === 'approved' ? 'bg-green-500/20 text-green-400 border-green-500/30' :
+//           team.status === 'rejected' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
+//           'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+//         }`}>
+//           {team.status.toUpperCase()}
+//         </Badge>
+//       </div>
+
+//       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+//         {/* Captain Info */}
+//         <Card className="bg-gray-800/50 border-gray-700">
+//           <CardHeader className="pb-2">
+//             <CardTitle className="text-white flex items-center gap-2 text-lg">
+//               <User className="w-5 h-5 text-orange-400" />
+//               Captain Details
+//             </CardTitle>
+//           </CardHeader>
+//           <CardContent className="space-y-3">
+//             <InfoRow icon={User} label="Name" value={team.captainName} />
+//             <InfoRow icon={Phone} label="Phone" value={team.captainPhone} href={`tel:${team.captainPhone}`} />
+//             <InfoRow icon={Mail} label="Email" value={team.captainEmail} href={`mailto:${team.captainEmail}`} />
+//             <InfoRow icon={MapPin} label="Address" value={`${team.address}, ${team.municipality}`} />
+//           </CardContent>
+//         </Card>
+
+//         {/* Payment Info */}
+//         <Card className="bg-gray-800/50 border-gray-700">
+//           <CardHeader className="pb-2">
+//             <CardTitle className="text-white flex items-center gap-2 text-lg">
+//               <CreditCard className="w-5 h-5 text-green-400" />
+//               Payment Details
+//             </CardTitle>
+//           </CardHeader>
+//           <CardContent className="space-y-3">
+//             {team.payment ? (
+//               <>
+//                 <InfoRow label="Transaction ID" value={team.payment.transactionId} mono />
+//                 <InfoRow label="Method" value={team.payment.paymentMethod} />
+//                 <InfoRow label="Amount" value={`NPR ${team.payment.amount?.toLocaleString()}`} />
+//                 <div className="flex items-center gap-2">
+//                   <span className="text-gray-400 text-sm">Status:</span>
+//                   <Badge className={
+//                     team.payment.status === 'approved' ? 'bg-green-500/20 text-green-400' :
+//                     team.payment.status === 'rejected' ? 'bg-red-500/20 text-red-400' :
+//                     'bg-yellow-500/20 text-yellow-400'
+//                   }>
+//                     {team.payment.status}
+//                   </Badge>
+//                 </div>
+//                 {team.payment.screenshot && (
+//                   <div>
+//                     <p className="text-gray-400 text-sm mb-2">Screenshot:</p>
+//                     <a href={team.payment.screenshot} target="_blank" rel="noopener noreferrer">
+//                       <Image
+//                         src={getOptimizedImageUrl(team.payment.screenshot, { width: 400 })}
+//                         alt="Payment Screenshot"
+//                         width={300}
+//                         height={200}
+//                         className="rounded-lg border border-gray-700 hover:border-orange-500 transition-colors cursor-pointer object-cover"
+//                       />
+//                     </a>
+//                   </div>
+//                 )}
+//               </>
+//             ) : (
+//               <p className="text-gray-500">No payment recorded</p>
+//             )}
+//           </CardContent>
+//         </Card>
+//       </div>
+
+//       {/* Players List */}
+//       <Card className="bg-gray-800/50 border-gray-700">
+//         <CardHeader className="pb-2 flex flex-row items-center justify-between">
+//           <CardTitle className="text-white flex items-center gap-2 text-lg">
+//             <Users className="w-5 h-5 text-purple-400" />
+//             Players ({team.players.length})
+//           </CardTitle>
+//           <Button variant="outline" size="sm" className="border-gray-700 text-white text-xs">
+//             <Download className="w-3 h-3 mr-1" /> Export
+//           </Button>
+//         </CardHeader>
+//         <CardContent>
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+//             {team.players.map((player) => (
+//               <div key={player.id} className="p-3 bg-gray-900/50 rounded-lg flex items-center gap-3">
+//                 {player.passportPhoto ? (
+//                   <Image
+//                     src={getOptimizedImageUrl(player.passportPhoto, { width: 50, height: 50 })}
+//                     alt={player.fullName}
+//                     width={44}
+//                     height={44}
+//                     className="rounded-full object-cover flex-shrink-0"
+//                   />
+//                 ) : (
+//                   <div className="w-11 h-11 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0">
+//                     <User className="w-5 h-5 text-gray-500" />
+//                   </div>
+//                 )}
+//                 <div className="flex-1 min-w-0">
+//                   <p className="text-white text-sm font-medium truncate">{player.fullName}</p>
+//                   <div className="flex flex-wrap items-center gap-1.5 mt-1">
+//                     <Badge className="bg-orange-500/20 text-orange-400 text-[10px] border-0">
+//                       {player.position?.replace(/_/g, ' ')}
+//                     </Badge>
+//                     {player.jerseyNumber && (
+//                       <Badge className="bg-purple-500/20 text-purple-400 text-[10px] border-0">
+//                         #{player.jerseyNumber}
+//                       </Badge>
+//                     )}
+//                     <span className="text-gray-400 text-[10px]">Age: {player.age}</span>
+//                     <span className="text-gray-400 text-[10px] truncate">{player.phoneNumber}</span>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           {team.players.length === 0 && (
+//             <p className="text-gray-500 text-center py-4">No players registered</p>
+//           )}
+//         </CardContent>
+//       </Card>
+
+//       {/* Actions */}
+//       <div className="flex flex-wrap gap-3 pb-8">
+//         {team.status === 'pending' && (
+//           <>
+//             <form action={`/api/admin/teams/${team.id}/approve`} method="POST">
+//               <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white">
+//                 <Check className="w-4 h-4 mr-2" /> Approve Team
+//               </Button>
+//             </form>
+//             <Button variant="destructive">
+//               <X className="w-4 h-4 mr-2" /> Reject Team
+//             </Button>
+//           </>
+//         )}
+//         <Button variant="outline" className="border-gray-700 text-white">
+//           <Download className="w-4 h-4 mr-2" /> Download PDF
+//         </Button>
+//         <a href={`mailto:${team.captainEmail}`}>
+//           <Button variant="outline" className="border-gray-700 text-white">
+//             <Mail className="w-4 h-4 mr-2" /> Email Captain
+//           </Button>
+//         </a>
+//         <a href={`tel:${team.captainPhone}`}>
+//           <Button variant="outline" className="border-gray-700 text-white">
+//             <Phone className="w-4 h-4 mr-2" /> Call Captain
+//           </Button>
+//         </a>
+//       </div>
+//     </div>
+//   )
+// }
+
+// // Helper component
+// function InfoRow({ 
+//   icon: Icon, label, value, href, mono 
+// }: { 
+//   icon?: any; label: string; value: string; href?: string; mono?: boolean 
+// }) {
+//   const content = (
+//     <div className="flex items-center gap-2 text-sm">
+//       {Icon && <Icon className="w-4 h-4 text-gray-500 flex-shrink-0" />}
+//       <span className="text-gray-400 flex-shrink-0">{label}:</span>
+//       <span className={`text-white truncate ${mono ? 'font-mono text-xs' : ''}`}>
+//         {value}
+//       </span>
+//     </div>
+//   )
+
+//   if (href) {
+//     return (
+//       <a href={href} className="text-blue-400 hover:underline block">
+//         {content}
+//       </a>
+//     )
+//   }
+
+//   return content
+// }
+
+
+
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useParams, useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { getOptimizedImageUrl } from '@/lib/cloudinary-client'
+import { 
+  Users, Phone, Mail, MapPin, CreditCard, User, Shirt,
+  Download, Check, X, ArrowLeft, Loader2, Eye, Trash2,
+  AlertCircle
+} from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { toast } from 'sonner'
+
+export default function TeamDetailPage() {
+  const params = useParams()
+  const router = useRouter()
+  const id = params?.id as string
+
+  const [team, setTeam] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [actionLoading, setActionLoading] = useState<string | null>(null)
+  const [showRejectModal, setShowRejectModal] = useState(false)
+  const [rejectReason, setRejectReason] = useState('')
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [expandedPlayers, setExpandedPlayers] = useState<Set<string>>(new Set())
+
+  useEffect(() => {
+    if (id) fetchTeam()
+  }, [id])
+
+  const fetchTeam = async () => {
+    try {
+      const res = await fetch(`/api/admin/teams/${id}`)
+      const data = await res.json()
+      if (data.success) setTeam(data.team)
+    } catch (err) {
+      console.error('Failed to fetch team:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleAction = async (action: string, body?: any) => {
+    setActionLoading(action)
+    try {
+      const res = await fetch(`/api/admin/teams/${id}/${action}`, {
+        method: action === 'delete' ? 'DELETE' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body ? JSON.stringify(body) : undefined,
+      })
+      const data = await res.json()
+      if (data.success) {
+        toast.success(data.message)
+        if (action === 'delete') {
+          router.push('/admin/dashboard/teams')
+        } else {
+          fetchTeam()
+          setShowRejectModal(false)
+        }
+      } else {
+        toast.error(data.error || 'Action failed')
+      }
+    } catch {
+      toast.error('Network error')
+    } finally {
+      setActionLoading(null)
+    }
+  }
+
+  const togglePlayerExpand = (playerId: string) => {
+    setExpandedPlayers(prev => {
+      const next = new Set(prev)
+      if (next.has(playerId)) next.delete(playerId)
+      else next.add(playerId)
+      return next
+    })
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
+      </div>
+    )
+  }
+
+  if (!team) {
+    return (
+      <div className="text-center py-20">
+        <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+        <p className="text-gray-400 text-lg">Team not found</p>
+        <Link href="/admin/dashboard/teams" className="text-orange-400 hover:underline mt-2 inline-block">
+          Back to Teams
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6 max-w-5xl mx-auto pb-8">
+      {/* Back */}
+      <Link href="/admin/dashboard/teams" className="inline-flex items-center gap-2 text-gray-400 hover:text-white">
+        <ArrowLeft className="w-4 h-4" /> Back to Teams
+      </Link>
+
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          {team.teamLogo ? (
+            <Image src={getOptimizedImageUrl(team.teamLogo, { width: 80, height: 80 })} alt="" width={56} height={56} className="rounded-xl object-cover" />
+          ) : (
+            <div className="w-14 h-14 rounded-xl bg-gray-700 flex items-center justify-center"><Users className="w-7 h-7 text-gray-500" /></div>
+          )}
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-white">{team.teamName}</h1>
+            <p className="text-gray-400 text-sm">{team.registrationId} • {team.district}</p>
+          </div>
+        </div>
+        <Badge className={`text-base px-4 py-1.5 ${
+          team.status === 'approved' ? 'bg-green-500/20 text-green-400 border-green-500/30' :
+          team.status === 'rejected' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
+          'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+        }`}>
+          {team.status.toUpperCase()}
+        </Badge>
+      </div>
+
+      {/* Captain + Payment Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <Card className="bg-gray-800/50 border-gray-700">
+          <CardHeader className="pb-2"><CardTitle className="text-white text-base flex items-center gap-2"><User className="w-4 h-4 text-orange-400" /> Captain</CardTitle></CardHeader>
+          <CardContent className="space-y-2 text-sm">
+            <Row label="Name" value={team.captainName} />
+            <Row label="Phone" value={team.captainPhone} isPhone />
+            <Row label="Email" value={team.captainEmail} isEmail />
+            <Row label="Address" value={`${team.address}, ${team.municipality}`} />
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gray-800/50 border-gray-700">
+          <CardHeader className="pb-2"><CardTitle className="text-white text-base flex items-center gap-2"><CreditCard className="w-4 h-4 text-green-400" /> Payment</CardTitle></CardHeader>
+          <CardContent className="space-y-2 text-sm">
+            {team.payment ? (
+              <>
+                <Row label="Txn ID" value={team.payment.transactionId} mono />
+                <Row label="Method" value={team.payment.paymentMethod} />
+                <Row label="Amount" value={`NPR ${team.payment.amount?.toLocaleString()}`} />
+                <div className="flex items-center gap-2"><span className="text-gray-400">Status:</span><Badge className={team.payment.status === 'approved' ? 'bg-green-500/20 text-green-400' : team.payment.status === 'rejected' ? 'bg-red-500/20 text-red-400' : 'bg-yellow-500/20 text-yellow-400'}>{team.payment.status}</Badge></div>
+                {team.payment.screenshot && (
+                  <a href={team.payment.screenshot} target="_blank" rel="noopener noreferrer">
+                    <Image src={getOptimizedImageUrl(team.payment.screenshot, { width: 300 })} alt="Screenshot" width={200} height={120} className="rounded-lg border border-gray-700 hover:border-orange-500 mt-2 object-cover" />
+                  </a>
+                )}
+              </>
+            ) : <p className="text-gray-500">No payment</p>}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Players List */}
+      <Card className="bg-gray-800/50 border-gray-700">
+        <CardHeader className="pb-2 flex flex-row items-center justify-between">
+          <CardTitle className="text-white text-base flex items-center gap-2"><Users className="w-4 h-4 text-purple-400" /> Players ({team.players?.length || 0})</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            {team.players?.map((player: any) => {
+              const isExpanded = expandedPlayers.has(player.id)
+              return (
+                <div key={player.id} className="bg-gray-900/50 rounded-lg overflow-hidden">
+                  {/* Player Header - Click to expand */}
+                  <button
+                    onClick={() => togglePlayerExpand(player.id)}
+                    className="w-full p-3 flex items-center gap-3 hover:bg-gray-800/30 transition-colors text-left"
+                  >
+                    {player.passportPhoto ? (
+                      <Image src={getOptimizedImageUrl(player.passportPhoto, { width: 40, height: 40 })} alt="" width={36} height={36} className="rounded-full object-cover flex-shrink-0" />
+                    ) : (
+                      <div className="w-9 h-9 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0"><User className="w-4 h-4 text-gray-500" /></div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white text-sm font-medium">{player.fullName}</p>
+                      <div className="flex flex-wrap items-center gap-1.5 mt-0.5">
+                        <Badge className="bg-orange-500/20 text-orange-400 text-[10px] border-0">{player.position?.replace(/_/g, ' ')}</Badge>
+                        {player.jerseyNumber && <Badge className="bg-purple-500/20 text-purple-400 text-[10px] border-0">#{player.jerseyNumber}</Badge>}
+                        <span className="text-gray-400 text-[10px]">Age: {player.age}</span>
+                      </div>
+                    </div>
+                    <span className="text-gray-500 text-xs">{isExpanded ? '▲' : '▼'}</span>
+                  </button>
+
+                  {/* Expanded Details */}
+                  {isExpanded && (
+                    <div className="px-4 pb-4 grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm border-t border-gray-800 pt-3">
+                      <Detail label="Full Name" value={player.fullName} />
+                      <Detail label="Phone" value={player.phoneNumber} />
+                      <Detail label="Age" value={player.age?.toString()} />
+                      <Detail label="Position" value={player.position?.replace(/_/g, ' ')} />
+                      <Detail label="Jersey #" value={player.jerseyNumber?.toString() || '-'} />
+                      <Detail label="Jersey Name" value={player.jerseyName || '-'} />
+                      <Detail label="Jersey Size" value={player.jerseySize || '-'} />
+                      <Detail label="Address" value={player.address || '-'} full />
+                      <Detail label="Photo" value={player.passportPhoto ? '✓ Uploaded' : '✗ Missing'} />
+                      {player.passportPhoto && (
+                        <div className="col-span-2 sm:col-span-3">
+                          <Image src={getOptimizedImageUrl(player.passportPhoto, { width: 200 })} alt="Photo" width={100} height={100} className="rounded-lg" />
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Action Buttons */}
+      <div className="flex flex-wrap gap-2">
+        {team.status === 'pending' && (
+          <>
+            <Button onClick={() => handleAction('approve')} disabled={!!actionLoading} className="bg-green-600 hover:bg-green-700 text-white">
+              {actionLoading === 'approve' ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : <Check className="w-4 h-4 mr-1" />}
+              Approve
+            </Button>
+            <Button onClick={() => setShowRejectModal(true)} disabled={!!actionLoading} variant="destructive">
+              <X className="w-4 h-4 mr-1" /> Reject
+            </Button>
+          </>
+        )}
+        <a href={`/api/admin/teams/${id}/pdf`} download>
+          <Button variant="outline" className="border-gray-700 text-white">
+            <Download className="w-4 h-4 mr-1" /> Download PDF
+          </Button>
+        </a>
+        <a href={`mailto:${team.captainEmail}`}>
+          <Button variant="outline" className="border-gray-700 text-white">
+            <Mail className="w-4 h-4 mr-1" /> Email
+          </Button>
+        </a>
+        <a href={`tel:${team.captainPhone}`}>
+          <Button variant="outline" className="border-gray-700 text-white">
+            <Phone className="w-4 h-4 mr-1" /> Call
+          </Button>
+        </a>
+        <Button onClick={() => setShowDeleteConfirm(true)} variant="outline" className="border-red-800 text-red-400 hover:bg-red-500/10">
+          <Trash2 className="w-4 h-4 mr-1" /> Delete
+        </Button>
+      </div>
+
+      {/* Reject Modal */}
+      {showRejectModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-md bg-gray-900 border-gray-700">
+            <CardHeader><CardTitle className="text-white">Reject Team</CardTitle></CardHeader>
+            <CardContent className="space-y-3">
+              <Textarea value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} placeholder="Reason for rejection..." className="bg-gray-800 border-gray-700 text-white" />
+              <div className="flex gap-2">
+                <Button onClick={() => handleAction('reject', { reason: rejectReason })} disabled={!!actionLoading} variant="destructive" className="flex-1">
+                  {actionLoading === 'reject' ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : null} Confirm Reject
+                </Button>
+                <Button onClick={() => setShowRejectModal(false)} variant="outline" className="border-gray-700 text-white">Cancel</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Delete Confirm */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-sm bg-gray-900 border-gray-700">
+            <CardHeader><CardTitle className="text-white flex items-center gap-2"><AlertCircle className="w-5 h-5 text-red-400" /> Delete Team?</CardTitle></CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-gray-400 text-sm">This will permanently delete this team and all its players. This cannot be undone.</p>
+              <div className="flex gap-2">
+                <Button onClick={() => handleAction('delete')} disabled={!!actionLoading} variant="destructive" className="flex-1">
+                  {actionLoading === 'delete' ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : <Trash2 className="w-4 h-4 mr-1" />} Delete
+                </Button>
+                <Button onClick={() => setShowDeleteConfirm(false)} variant="outline" className="border-gray-700 text-white">Cancel</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Helper components
+function Row({ label, value, mono, isPhone, isEmail }: { label: string; value: string; mono?: boolean; isPhone?: boolean; isEmail?: boolean }) {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-gray-400 flex-shrink-0">{label}:</span>
+      {isPhone ? (
+        <a href={`tel:${value}`} className="text-blue-400 hover:underline truncate">{value}</a>
+      ) : isEmail ? (
+        <a href={`mailto:${value}`} className="text-blue-400 hover:underline truncate">{value}</a>
+      ) : (
+        <span className={`text-white truncate ${mono ? 'font-mono text-xs' : ''}`}>{value}</span>
+      )}
+    </div>
+  )
+}
+
+function Detail({ label, value, full }: { label: string; value: string; full?: boolean }) {
+  return (
+    <div className={full ? 'col-span-2 sm:col-span-3' : ''}>
+      <span className="text-gray-500 text-xs">{label}</span>
+      <p className="text-white text-sm">{value}</p>
+    </div>
+  )
+}
