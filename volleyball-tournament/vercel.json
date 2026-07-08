@@ -1,0 +1,22 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run vercel-build",
+  "installCommand": "npm install",
+  "outputDirectory": ".next",
+  "devCommand": "npm run dev",
+  "regions": ["bom1"],
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "DATABASE_URL": "postgresql://neondb_owner:npg_Ck6UnXehjZ0D@ep-autumn-night-ahe8fber-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require",
+    "NEXTAUTH_SECRET": "your-secret-key-here",
+    "CLOUDINARY_CLOUD_NAME": "djqvs7ir3",
+    "CLOUDINARY_API_KEY": "648383666562549",
+    "CLOUDINARY_API_SECRET": "ZjtkWqBFEr9EHK9--CydkfXaGgc",
+    "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME": "djqvs7ir3",
+    "RESEND_API_KEY": "re_YRCVtWuh_2CcQdePWjZUkCHZoS5Pqb9vk"
+  }
+}
