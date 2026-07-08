@@ -146,7 +146,7 @@ export default function HeroSection() {
         >
           <Badge
             variant="outline"
-            className="mb-6 px-6 py-2 text-base border-orange-500/50 bg-orange-500/10 text-orange-300"
+            className="mb-6 px-6 py-2 mt-4 text-base border-orange-500/50 bg-orange-500/10 text-orange-300"
           >
             <Sparkles className="w-4 h-4 mr-2" />
             Season 2083
@@ -154,26 +154,24 @@ export default function HeroSection() {
           </Badge>
         </motion.div>
 
-        {/* Main Title */}
-        <motion.h1
-          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-6 tracking-tighter"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <span className="bg-gradient-to-r from-orange-400 via-red-500 to-purple-600 bg-clip-text text-transparent">
-            VOLLEYBALL
-          </span>
-          <br />
-          <motion.span
-            className="text-white"
-            initial={{ opacity: 0 }}
-            animate={isLoaded ? { opacity: 1 } : {}}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            TOURNAMENT
-          </motion.span>
-        </motion.h1>
+<motion.h1
+  className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter px-2"
+  initial={{ opacity: 0, y: 50 }}
+  animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 0.8, delay: 0.2 }}
+>
+  <span className="bg-gradient-to-r from-orange-400 via-red-500 to-purple-600 bg-clip-text text-transparent block leading-tight">
+    नयाँ बस्ती खुल्ला
+  </span>
+  <motion.span
+    className="text-white block leading-tight"
+    initial={{ opacity: 0 }}
+    animate={isLoaded ? { opacity: 1 } : {}}
+    transition={{ duration: 1, delay: 0.5 }}
+  >
+    भलिबल प्रतियोगिता-२०८३
+  </motion.span>
+</motion.h1>
 
         {/* Subtitle */}
         <motion.p

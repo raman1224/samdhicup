@@ -58,7 +58,7 @@ const itemVariants: Variants = {
     {
       icon: MapPin,
       title: 'Venue',
-      value: 'National Sports Stadium',
+      value: 'Chari Deurali Sports Stadium',
       description: 'World-class facilities',
       color: 'from-red-500 to-pink-500',
       bgColor: 'bg-red-500/10',

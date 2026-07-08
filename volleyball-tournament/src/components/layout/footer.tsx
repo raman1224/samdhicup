@@ -56,10 +56,10 @@ const Footer = memo(function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* About Section */}
           <div>
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent mb-4">
-              Volleyball Tournament
-            </h3>
-            <p className="text-gray-400 text-sm mb-4">
+<h3 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent mb-4">
+  नयाँ बस्ती खुल्ला<br/>भलिबल प्रतियोगिता-२०८३
+</h3>
+           <p className="text-gray-400 text-sm mb-4">
               The biggest volleyball tournament bringing together teams from across the nation. 
               Experience the thrill of competitive volleyball.
             </p>
@@ -140,7 +140,7 @@ const Footer = memo(function Footer() {
 <div className="border-t border-gray-800 pt-8">
   <div className="flex flex-col md:flex-row justify-between items-center gap-4">
     <p className="text-gray-400 text-sm text-center md:text-left">
-      © {new Date().getFullYear()} Volleyball Tournament. All rights reserved.
+      © {new Date().getFullYear()} नयाँ बस्ती खुल्ला भलिबल प्रतियोगिता-२०८३. All rights reserved.
     </p>
     
     {/* DANGOL AI Credit */}

@@ -22,10 +22,10 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "Volleyball Tournament 2026 | Register Your Team Now",
-    template: "%s | Volleyball Tournament 2026",
+    default: "नयाँ बस्ती खुल्ला भलिबल प्रतियोगिता-२०८३ | Register Now",
+    template: "%s | नयाँ बस्ती भलिबल प्रतियोगिता-२०८३",
   },
-  description: "Register your team for the biggest volleyball tournament in Nepal.",
+  description: "नयाँ बस्ती खुल्ला भलिबल प्रतियोगिता-२०८३ को लागि आफ्नो टिम दर्ता गर्नुहोस्। पुरस्कार रू १,४०,०००+",
   metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
 }
 

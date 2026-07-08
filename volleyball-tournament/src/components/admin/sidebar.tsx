@@ -163,10 +163,8 @@ const Sidebar = memo(function Sidebar({ onClose }: SidebarProps) {
           </div>
           
           <div>
-            <h1 className="text-sm font-bold text-white group-hover:text-orange-400 transition-colors">
-              VB Admin
-            </h1>
-            <p className="text-[10px] text-gray-500">Tournament 2026</p>
+<h1 className="text-sm font-bold text-white">नयाँ बस्ती VB</h1>
+<p className="text-[10px] text-gray-500">प्रतियोगिता-२०८३</p>
           </div>
         </a>
         

@@ -1,11 +1,11 @@
 'use client'
 
-import { memo, useRef } from 'react'
+import { memo, useRef, useEffect, useState, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { 
-  Heart, 
+import {
+  Heart,
   Star,
   Building2,
   Shield,
@@ -19,6 +19,8 @@ const Sponsors = memo(function Sponsors() {
   const sponsors = [
     { name: 'Xtreme Energy Drink', type: 'Title Sponsor', logo: '/sponsors/sponsor1.png', tier: 'platinum' },
     { name: 'Neplays TV', type: 'Media Partner', logo: '/sponsors/sponsor5.png', tier: 'partner' },
+    { name: 'Himal Beverages', type: 'Refreshment Partner', logo: '/sponsors/sponsor3.png', tier: 'silver' },
+    { name: 'Kathmandu Telecom', type: 'Connectivity Partner', logo: '/sponsors/sponsor4.png', tier: 'bronze' },
   ]
 
   const partners = [
@@ -37,6 +39,50 @@ const Sponsors = memo(function Sponsors() {
       default: return 'from-blue-500 to-cyan-500'
     }
   }
+
+  // ---- Marquee logic ----
+  // Smoothly interpolates speed toward a target (normal vs slow-on-hover)
+  // using requestAnimationFrame, so the deceleration/acceleration itself feels fluid
+  // instead of an abrupt CSS animation-duration jump.
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [isHovering, setIsHovering] = useState(false)
+
+  const positionRef = useRef(0)
+  const speedRef = useRef(0.6) // px per frame at normal pace
+  const targetSpeedRef = useRef(0.6)
+  const rafRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    targetSpeedRef.current = isHovering ? 0.12 : 0.6
+  }, [isHovering])
+
+  useEffect(() => {
+    const step = () => {
+      // ease current speed toward target speed for a smooth slow-down/speed-up
+      speedRef.current += (targetSpeedRef.current - speedRef.current) * 0.06
+
+      const track = trackRef.current
+      if (track) {
+        positionRef.current -= speedRef.current
+        const halfWidth = track.scrollWidth / 2
+        if (halfWidth > 0 && Math.abs(positionRef.current) >= halfWidth) {
+          positionRef.current += halfWidth
+        }
+        track.style.transform = `translateX(${positionRef.current}px)`
+      }
+      rafRef.current = requestAnimationFrame(step)
+    }
+    rafRef.current = requestAnimationFrame(step)
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
+  const handlePointerEnter = useCallback(() => setIsHovering(true), [])
+  const handlePointerLeave = useCallback(() => setIsHovering(false), [])
+
+  // Duplicate the list so the strip can loop seamlessly
+  const marqueeItems = [...sponsors, ...sponsors]
 
   return (
     <section ref={ref} id="sponsors" className="py-20 relative overflow-hidden">
@@ -76,49 +122,59 @@ const Sponsors = memo(function Sponsors() {
           </p>
         </motion.div>
 
-        {/* Sponsors Grid */}
+        {/* Sponsors Marquee */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16"
+          className="relative mb-16"
         >
-          {sponsors.map((sponsor, index) => (
-            <motion.div
-              key={sponsor.name}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                type: 'spring',
-                stiffness: 200,
-              }}
-              whileHover={{ 
-                scale: 1.1,
-                rotate: [0, -5, 5, 0],
-                transition: { duration: 0.3 }
-              }}
+          {/* fade edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-32 z-10 bg-gradient-to-r from-gray-900 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-32 z-10 bg-gradient-to-l from-gray-900 to-transparent" />
+
+          <div
+            className="overflow-hidden"
+            onMouseEnter={handlePointerEnter}
+            onMouseLeave={handlePointerLeave}
+            onTouchStart={handlePointerEnter}
+            onTouchEnd={handlePointerLeave}
+          >
+            <div
+              ref={trackRef}
+              className="flex gap-6 w-max will-change-transform"
             >
-              <Card className="bg-gray-800/50 border-gray-700 hover:border-orange-500/50 transition-colors group">
-                <CardContent className="p-4 text-center">
-                  <motion.div
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${getTierColor(sponsor.tier)} p-0.5 mx-auto mb-3`}
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <div className="w-full h-full rounded-2xl bg-gray-900 flex items-center justify-center">
-                      <Building2 className="w-8 h-8 text-white" />
-                    </div>
-                  </motion.div>
-                  <h4 className="text-white font-semibold text-sm group-hover:text-orange-400 transition-colors">
-                    {sponsor.name}
-                  </h4>
-                  <p className="text-gray-400 text-xs mt-1">{sponsor.type}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+              {marqueeItems.map((sponsor, index) => (
+                <motion.div
+                  key={`${sponsor.name}-${index}`}
+                  whileHover={{
+                    scale: 1.08,
+                    rotate: [0, -3, 3, 0],
+                    transition: { duration: 0.3 },
+                  }}
+                  className="shrink-0 w-40 md:w-48"
+                >
+                  <Card className="bg-gray-800/50 border-gray-700 hover:border-orange-500/50 transition-colors group">
+                    <CardContent className="p-4 text-center">
+                      <motion.div
+                        className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${getTierColor(sponsor.tier)} p-0.5 mx-auto mb-3`}
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.8 }}
+                      >
+                        <div className="w-full h-full rounded-2xl bg-gray-900 flex items-center justify-center">
+                          <Building2 className="w-8 h-8 text-white" />
+                        </div>
+                      </motion.div>
+                      <h4 className="text-white font-semibold text-sm group-hover:text-orange-400 transition-colors">
+                        {sponsor.name}
+                      </h4>
+                      <p className="text-gray-400 text-xs mt-1">{sponsor.type}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         {/* Partners */}
