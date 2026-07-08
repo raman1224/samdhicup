@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Copy, Check, Smartphone, Building2 } from 'lucide-react'
+import { Copy, Check, Smartphone, Building2, AlertTriangle } from 'lucide-react'
 import { toast } from 'sonner'
 
 interface PaymentQRProps {
@@ -23,7 +23,6 @@ export function PaymentQR({ onMethodSelect, selectedMethod }: PaymentQRProps) {
       toast.success('Copied to clipboard!')
       setTimeout(() => setCopiedField(null), 2000)
     } catch {
-      // Fallback
       const textArea = document.createElement('textarea')
       textArea.value = text
       textArea.style.position = 'fixed'
@@ -101,7 +100,7 @@ export function PaymentQR({ onMethodSelect, selectedMethod }: PaymentQRProps) {
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <Image
-                    src="/images/esewa-qr.png"
+                    src="/images/esewa-qr.jpeg"
                     alt="eSewa QR Code"
                     width={200}
                     height={200}
@@ -133,8 +132,17 @@ export function PaymentQR({ onMethodSelect, selectedMethod }: PaymentQRProps) {
                 </div>
               </div>
 
+              {/* ⚠️ IMPORTANT REMINDER */}
+              <div className="flex items-start gap-2 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
+                <AlertTriangle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
+                <div className="text-xs text-yellow-400">
+                  <p className="font-semibold mb-1">⚠️ Important Reminder:</p>
+                  <p>After payment, <strong>copy the Transaction ID</strong> from your eSewa app and <strong>take a screenshot</strong> of the payment confirmation. You will need both in the next step!</p>
+                </div>
+              </div>
+
               <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/50 w-full justify-center py-2 text-sm">
-                Amount: NPR 8,000
+                Amount: NPR 7,000
               </Badge>
             </CardContent>
           </Card>
@@ -144,7 +152,7 @@ export function PaymentQR({ onMethodSelect, selectedMethod }: PaymentQRProps) {
               {[
                 { label: 'Bank Name', value: 'Global IME Bank' },
                 { label: 'Account Name', value: 'Bishal Tolami' },
-                { label: 'Account Number', value: '9803977546', field: 'bank-account' },
+                { label: 'Account Number', value: 'XXXXXXXXX', field: 'bank-account' },
                 { label: 'Branch', value: 'Kathmandu Branch' },
               ].map((item) => (
                 <div key={item.label} className="space-y-1">
@@ -172,8 +180,17 @@ export function PaymentQR({ onMethodSelect, selectedMethod }: PaymentQRProps) {
                 </div>
               ))}
 
+              {/* ⚠️ IMPORTANT REMINDER */}
+              <div className="flex items-start gap-2 p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
+                <AlertTriangle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
+                <div className="text-xs text-yellow-400">
+                  <p className="font-semibold mb-1">⚠️ Important Reminder:</p>
+                  <p>After transferring, <strong>copy the Transaction Reference Number</strong> from your bank app and <strong>take a screenshot</strong> of the confirmation. You will need both in the next step!</p>
+                </div>
+              </div>
+
               <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/50 w-full justify-center py-2 text-sm mt-2">
-                Amount: NPR 8,000
+                Amount: NPR 7,000
               </Badge>
             </CardContent>
           </Card>

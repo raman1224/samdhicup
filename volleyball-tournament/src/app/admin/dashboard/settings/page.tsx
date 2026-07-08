@@ -9,7 +9,7 @@ import { Settings, Save, DollarSign, Phone, Mail } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function SettingsPage() {
-  const [fee, setFee] = useState('8000')
+  const [fee, setFee] = useState('7000')
   const [phone, setPhone] = useState('9803977546')
   const [email, setEmail] = useState('www.bishaltolami049@gmail.com')
 

@@ -31,7 +31,6 @@ const Footer = memo(function Footer() {
       { label: 'FAQ', href: '#faq' },
       { label: 'Contact Us', href: '#contact' },
       { label: 'Venue', href: '#venue' },
-      { label: 'Gallery', href: '#gallery' },
     ],
     social: [
       { icon: FaFacebook, href: '#', label: 'Facebook' },
@@ -75,7 +74,7 @@ const Footer = memo(function Footer() {
               </div>
               <div className="flex items-center gap-2 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-orange-400" />
-                <span>Kathmandu, Nepal</span>
+                <span>Kavrepalanchok, Nepal</span>
               </div>
             </div>
           </div>
@@ -145,15 +144,15 @@ const Footer = memo(function Footer() {
     </p>
     
     {/* DANGOL AI Credit */}
-    <div className="flex items-center gap-3">
-       <Image
+    <div className="flex items-center gap-1">
+       {/* <Image
           src="/dangolai.png"
           alt="DANGOL AI"
-          width={24}
-          height={24}
+          width={44}
+          height={44}
           className="rounded"
-        />
-      <span className="text-gray-500 text-xs">Developed by</span>
+        /> */}
+      <span className="text-gray-500 text-sm">Developed by</span>
       <a 
         href="https://dangolai.vercel.app" 
         target="_blank" 

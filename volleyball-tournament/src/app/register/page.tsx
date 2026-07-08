@@ -1,7 +1,11 @@
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import RegistrationWizard from '@/components/registration/registration-wizard'
+import dynamic from 'next/dynamic';
 import { LoadingSkeleton } from '@/components/ui/loading-skeleton'
+const RegistrationWizard = dynamic(
+  () => import("@/components/registration/registration-wizard"),
+  { loading: () => <LoadingSkeleton height="400px" /> }
+);
 
 export const metadata: Metadata = {
   title: 'Register Your Team',

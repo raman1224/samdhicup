@@ -57,7 +57,7 @@ const Contact = memo(function Contact() {
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Kathmandu, Nepal',
+      value: 'चउरी देउराली -०६, नयाँ बस्ती, काभ्रे',
       description: 'Visit us in person',
       color: 'text-red-400',
       bgColor: 'bg-red-500/10',

@@ -1,14 +1,27 @@
+
 import { Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import prisma from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { StatsCards } from '@/components/admin/stats-cards'
-import RegistrationChart from '@/components/admin/charts/registration-chart'
-import PaymentChart from '@/components/admin/charts/payment-chart'
-import DistrictChart from '@/components/admin/charts/district-chart'
+import { LoadingSkeleton } from "@/components/ui/loading-skeleton"
 import Link from 'next/link'
 import { Eye, ArrowRight } from 'lucide-react'
 
-export const dynamic = 'force-dynamic'
+const StatsCards = dynamic(() => import('@/components/admin/stats-cards').then(m => ({ default: m.StatsCards })), {
+  loading: () => <LoadingSkeleton height="120px" />,
+})
+
+const RegistrationChart = dynamic(() => import('@/components/admin/charts/registration-chart'), {
+  loading: () => <LoadingSkeleton height="300px" />,
+})
+
+const PaymentChart = dynamic(() => import('@/components/admin/charts/payment-chart'), {
+  loading: () => <LoadingSkeleton height="300px" />,
+})
+
+const DistrictChart = dynamic(() => import('@/components/admin/charts/district-chart'), {
+  loading: () => <LoadingSkeleton height="350px" />,
+})
 
 async function getDashboardStats() {
   const [
@@ -73,28 +86,27 @@ export default async function AdminDashboard() {
           <h1 className="text-xl sm:text-2xl font-bold text-white">Dashboard</h1>
           <p className="text-gray-400 text-xs sm:text-sm">Tournament management overview</p>
         </div>
-        <Link
-          href="/admin/dashboard/teams"
-          className="text-orange-400 hover:text-orange-300 text-sm flex items-center gap-1"
-        >
+        <Link href="/admin/dashboard/teams" className="text-orange-400 hover:text-orange-300 text-sm flex items-center gap-1">
           View All Teams <ArrowRight className="w-3 h-3" />
         </Link>
       </div>
 
-      {/* Stats Cards - Client Component */}
-      <StatsCards stats={stats} />
+      {/* Stats - Client Component */}
+      <Suspense fallback={<LoadingSkeleton height="120px" />}>
+        <StatsCards stats={stats} />
+      </Suspense>
 
-      {/* Charts - Client Components wrapped in Suspense */}
+      {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <Suspense fallback={<div className="h-64 bg-gray-800/50 rounded-lg animate-pulse" />}>
+        <Suspense fallback={<LoadingSkeleton height="300px" />}>
           <RegistrationChart data={stats.recentRegistrations} />
         </Suspense>
-        <Suspense fallback={<div className="h-64 bg-gray-800/50 rounded-lg animate-pulse" />}>
+        <Suspense fallback={<LoadingSkeleton height="300px" />}>
           <PaymentChart data={stats.paymentStats} />
         </Suspense>
       </div>
 
-      <Suspense fallback={<div className="h-80 bg-gray-800/50 rounded-lg animate-pulse" />}>
+      <Suspense fallback={<LoadingSkeleton height="350px" />}>
         <DistrictChart data={stats.teamsByDistrict} />
       </Suspense>
 

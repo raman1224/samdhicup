@@ -56,7 +56,7 @@ export const playerSchemaWithAgeValidation = playerSchema.refine(
 export const paymentSchema = z.object({
   transactionId: z.string().min(3, 'Transaction ID required'),
   paymentMethod: z.enum(['esewa', 'bank']).default('esewa'),
-  amount: z.number().min(8000, 'Minimum NPR 8,000').default(8000),
+  amount: z.number().min(7000, 'Minimum NPR 7,000').default(7000),
   screenshot: z.string().min(1, 'Payment screenshot required'),
 })
 

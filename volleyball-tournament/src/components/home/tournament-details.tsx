@@ -48,8 +48,8 @@ const itemVariants: Variants = {
     {
       icon: Calendar,
       title: 'Tournament Date',
-      value: 'June 15-20, 2026',
-      description: '6 days of intense competition',
+      value: 'Ashoj 29 - Kartik 02, 2083',
+      description: '5 days of intense competition',
       color: 'from-blue-500 to-cyan-500',
       bgColor: 'bg-blue-500/10',
       borderColor: 'border-blue-500/30',
@@ -78,7 +78,7 @@ const itemVariants: Variants = {
     {
       icon: DollarSign,
       title: 'Registration Fee',
-      value: 'NPR 8,000',
+      value: 'NPR 7,000',
       description: 'Per team registration',
       color: 'from-green-500 to-emerald-500',
       bgColor: 'bg-green-500/10',
@@ -88,7 +88,7 @@ const itemVariants: Variants = {
     {
       icon: Clock,
       title: 'Registration Deadline',
-      value: 'June 10, 2026',
+      value: 'Ashoj 25, 2083',
       description: 'Register before deadline',
       color: 'from-orange-500 to-yellow-500',
       bgColor: 'bg-orange-500/10',

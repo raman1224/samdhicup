@@ -24,7 +24,7 @@ const FAQ = memo(function FAQ() {
     {
       icon: CreditCard,
       question: 'What is the registration fee?',
-      answer: 'The registration fee is NPR 8,000 per team. This includes participation in all matches, player IDs, and access to venue facilities. Payment can be made via eSewa or bank transfer.',
+      answer: 'The registration fee is NPR 7,000 per team. This includes participation in all matches, player IDs, and access to venue facilities. Payment can be made via eSewa or bank transfer.',
     },
     {
       icon: Users,
@@ -34,7 +34,7 @@ const FAQ = memo(function FAQ() {
     {
       icon: Calendar,
       question: 'What are the important dates?',
-      answer: 'Registration opens on May 1, 2026, and closes on June 10, 2026. The tournament will be held from June 15-20, 2026. The match schedule will be published on June 12, 2026.',
+      answer: 'Registration opens on Bhadra 25, 2083, and closes on Ashoj 25, 2083. The tournament will be held from Ashoj 29 - Kartik 02, 2083. The match schedule will be published on Ashoj 27, 2083.',
     },
     {
       icon: Trophy,

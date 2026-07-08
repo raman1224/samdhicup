@@ -67,7 +67,7 @@ const RegistrationInfo = memo(function RegistrationInfo() {
   const requirements = [
     'Valid team name and details',
     'Captain contact information',
-    'Payment of NPR 8,000',
+    'Payment of NPR 7,000',
     '10 registered players',
     'Player photos and documents',
     'Valid ID proof for all players',

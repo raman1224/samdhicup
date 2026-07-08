@@ -25,7 +25,9 @@ const cardConfigs = [
   { icon: CreditCard, label: 'Pending', key: 'pendingPayments', color: 'bg-yellow-500/20 text-yellow-400' },
   { icon: CheckCircle, label: 'Approved', key: 'approvedTeams', color: 'bg-green-500/20 text-green-400' },
   { icon: XCircle, label: 'Rejected', key: 'rejectedTeams', color: 'bg-red-500/20 text-red-400' },
-  { icon: DollarSign, label: 'Revenue', key: 'totalRevenue', color: 'bg-purple-500/20 text-purple-400', format: (v: number) => `रू ${v.toLocaleString()}` },
+  // { icon: DollarSign, label: 'Revenue', key: 'totalRevenue', color: 'bg-purple-500/20 text-purple-400', format: (v: number) => `रू ${v.toLocaleString()}` },
+    { icon: DollarSign, label: 'Revenue', key: 'totalRevenue', color: 'bg-purple-500/20 text-purple-400', format: (v: number) => `रू 7000` },
+
 ]
 
 export const StatsCards = memo(function StatsCards({ stats }: StatsCardsProps) {

@@ -17,12 +17,8 @@ const Sponsors = memo(function Sponsors() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const sponsors = [
-    { name: 'TechCorp Nepal', type: 'Title Sponsor', logo: '/sponsors/sponsor1.png', tier: 'platinum' },
-    { name: 'SportsGear Pro', type: 'Gold Sponsor', logo: '/sponsors/sponsor2.png', tier: 'gold' },
-    { name: 'EnergyMax', type: 'Silver Sponsor', logo: '/sponsors/sponsor3.png', tier: 'silver' },
-    { name: 'FitLife Nepal', type: 'Bronze Sponsor', logo: '/sponsors/sponsor4.png', tier: 'bronze' },
-    { name: 'MediaHub', type: 'Media Partner', logo: '/sponsors/sponsor5.png', tier: 'partner' },
-    { name: 'TravelNepal', type: 'Travel Partner', logo: '/sponsors/sponsor6.png', tier: 'partner' },
+    { name: 'Xtreme Energy Drink', type: 'Title Sponsor', logo: '/sponsors/sponsor1.png', tier: 'platinum' },
+    { name: 'Neplays TV', type: 'Media Partner', logo: '/sponsors/sponsor5.png', tier: 'partner' },
   ]
 
   const partners = [

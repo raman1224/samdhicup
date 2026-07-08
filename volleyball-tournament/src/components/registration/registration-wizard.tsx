@@ -4,7 +4,6 @@ import { useState, useCallback, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-// import { registrationSchema, type RegistrationFormData } from '@/schemas/registration'
 import { registrationSchema, type RegistrationFormInput } from '@/schemas/registration'  //new
 import { useDeviceType } from '@/hooks/useMediaQuery'
 import { Button } from '@/components/ui/button'
@@ -68,7 +67,7 @@ const defaultValues: RegistrationFormInput = {  //new
   payment: {
     transactionId: '',
     paymentMethod: 'esewa' as const,
-    amount: 8000,
+    amount: 7000,
     screenshot: '',
   },
 }
@@ -252,61 +251,7 @@ const router = useRouter()
       scrollTop()
     }
   }, [currentStep])
-
-// const handleSubmit = useCallback(async () => {
-//   setIsSubmitting(true)
-  
-//   try {
-//     const data = getValues()
-    
-//     // Validate all data before sending
-//     const validated = registrationSchema.safeParse(data)
-//     if (!validated.success) {
-//       const firstError = validated.error.issues[0]
-//       toast.error(firstError?.message || 'Please complete all required fields')
-//       setIsSubmitting(false)
-//       return
-//     }
-
-//     // Send to API
-//     const formDataObj = new FormData()
-//     formDataObj.append('data', JSON.stringify(validated.data))
-
-//     const res = await fetch('/api/register', {
-//       method: 'POST',
-//       body: formDataObj,
-//     })
-
-//     const result = await res.json()
-
-//     if (result.success) {
-//       // Clear saved data
-//       localStorage.removeItem(STORAGE_KEY)
-//       localStorage.removeItem(STORAGE_STEP)
-//       localStorage.removeItem(STORAGE_COMPLETED)
-      
-//       toast.success('Registration submitted! 🎉')
-      
-//       // Redirect to success page
-//       setTimeout(() => {
-//         window.location.href = `/register/success?id=${result.registrationId}`
-//       }, 1500)
-//     } else {
-//       if (res.status === 429) {
-//         toast.error('Please wait a moment before trying again')
-//       } else {
-//         toast.error(result.error || 'Registration failed. Please try again.')
-//       }
-//     }
-//   } catch (err) {
-//     console.error('Submit error:', err)
-//     toast.error('Network error. Please check your connection and try again.')
-//   } finally {
-//     setIsSubmitting(false)
-//   }
-// }, [getValues])
 // Replace the handleSubmit function:
-
 const handleSubmit = useCallback(async () => {
   setIsSubmitting(true)
   
@@ -500,3 +445,5 @@ const handleSubmit = useCallback(async () => {
     </FormProvider>
   )
 }
+
+// date 

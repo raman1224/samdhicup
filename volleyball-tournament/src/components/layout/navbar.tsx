@@ -101,7 +101,7 @@ const Navbar = memo(function Navbar() {
                 >
                   Volleyball
                 </motion.h1>
-                <h2 className="text-[10px] md:text-xs text-gray-400 -mt-0.5">Tournament 2026</h2>
+                <h2 className="text-[10px] md:text-xs text-gray-400 -mt-0.5">Tournament 2083</h2>
               </div>
             </Link>
 

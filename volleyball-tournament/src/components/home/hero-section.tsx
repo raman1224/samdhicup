@@ -27,7 +27,7 @@ export default function HeroSection() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 100])
 
-  const tournamentDate = new Date('2026-06-15T00:00:00')
+  const tournamentDate = new Date('2026-10-26T00:00:00')
   const { days, hours, minutes, seconds } = useCountdown(tournamentDate)
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function HeroSection() {
   const spotlightY = useTransform(mouseY, (y) => `${y}px`)
 
   const stats = [
-    { icon: Trophy, label: 'Prize Pool', value: 'रू 9,00,000+', color: 'text-yellow-400' },
+    { icon: Trophy, label: 'Prize Pool', value: 'रू 1,40,000+', color: 'text-yellow-400' },
     { icon: Users, label: 'Expected Teams', value: '32+', color: 'text-blue-400' },
     { icon: Calendar, label: 'Registration Closes In', value: `${days}d ${hours}h ${minutes}m`, color: 'text-green-400' },
   ]
@@ -149,7 +149,7 @@ export default function HeroSection() {
             className="mb-6 px-6 py-2 text-base border-orange-500/50 bg-orange-500/10 text-orange-300"
           >
             <Sparkles className="w-4 h-4 mr-2" />
-            Season 2026
+            Season 2083
             <Sparkles className="w-4 h-4 ml-2" />
           </Badge>
         </motion.div>

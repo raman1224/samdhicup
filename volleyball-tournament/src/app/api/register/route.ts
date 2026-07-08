@@ -31,12 +31,12 @@ export async function POST(request: NextRequest) {
         data: {
           year: 2026,
           name: 'Volleyball Championship 2026',
-          registrationFee: 8000,
+          registrationFee: 7000,
           maxPlayers: 10,
           isActive: true,
-          venue: 'National Stadium, Kathmandu',
-          startDate: new Date('2026-06-15'),
-          endDate: new Date('2026-06-20'),
+          venue: 'Kavrepalanchok, Nepal',
+          startDate: new Date('2026-10-26'),
+          endDate: new Date('2026-10-30'),
         },
       })
     }

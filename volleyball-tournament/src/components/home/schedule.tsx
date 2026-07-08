@@ -21,7 +21,7 @@ const Schedule = memo(function Schedule() {
     {
       phase: 'Phase 1',
       title: 'Registration Opens',
-      date: 'May 1, 2026',
+      date: 'Bhadra 25, 2083',
       time: '9:00 AM',
       description: 'Team registration begins online',
       status: 'upcoming',
@@ -33,7 +33,7 @@ const Schedule = memo(function Schedule() {
     {
       phase: 'Phase 2',
       title: 'Registration Closes',
-      date: 'June 10, 2026',
+      date: 'Ashoj 25, 2083',
       time: '11:59 PM',
       description: 'Last date for team registration',
       status: 'upcoming',
@@ -45,7 +45,7 @@ const Schedule = memo(function Schedule() {
     {
       phase: 'Phase 3',
       title: 'Fixture Announcement',
-      date: 'June 12, 2026',
+      date: 'Ashoj 27, 2083',
       time: '12:00 PM',
       description: 'Match schedule and groups announced',
       status: 'upcoming',
@@ -57,8 +57,8 @@ const Schedule = memo(function Schedule() {
     {
       phase: 'Phase 4',
       title: 'Opening Ceremony',
-      date: 'June 15, 2026',
-      time: '8:00 AM',
+      date: 'Ashoj 29, 2083',
+      time: '9:00 AM',
       description: 'Grand opening ceremony at the venue',
       status: 'upcoming',
       color: 'text-orange-400',
@@ -69,7 +69,7 @@ const Schedule = memo(function Schedule() {
     {
       phase: 'Phase 5',
       title: 'Group Stage Matches',
-      date: 'June 15-18, 2026',
+      date: 'Ashoj 29-31, 2083',
       time: '9:00 AM - 6:00 PM',
       description: 'All group stage matches throughout the day',
       status: 'upcoming',
@@ -81,7 +81,7 @@ const Schedule = memo(function Schedule() {
     {
       phase: 'Phase 6',
       title: 'Knockout Stage',
-      date: 'June 19, 2026',
+      date: 'Kartik 01, 2083',
       time: '9:00 AM - 6:00 PM',
       description: 'Quarter-finals and semi-finals',
       status: 'upcoming',
@@ -93,7 +93,7 @@ const Schedule = memo(function Schedule() {
     {
       phase: 'Phase 7',
       title: 'Finals & Closing Ceremony',
-      date: 'June 20, 2026',
+      date: 'Kartik 02, 2083',
       time: '10:00 AM - 8:00 PM',
       description: 'Finals, prize distribution, and closing ceremony',
       status: 'upcoming',
