@@ -172,16 +172,40 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ email, otp }),
       })
       const data = await res.json()
+
+      // if (data.success) {
+      //   clearAllState()
+      //   // Store token for auth check
+      //   if (typeof window !== 'undefined') {
+      //     sessionStorage.setItem('admin_token', data.token)
+      //   }
+      //   document.cookie = `admin_token=${data.token}; path=/; max-age=86400; SameSite=Lax`
+      //   toast.success('Login successful!')
+      //   router.push('/admin/dashboard')
+      // } 
+
+      //new
       if (data.success) {
-        clearAllState()
-        // Store token for auth check
-        if (typeof window !== 'undefined') {
-          sessionStorage.setItem('admin_token', data.token)
-        }
-        document.cookie = `admin_token=${data.token}; path=/; max-age=86400; SameSite=Lax`
-        toast.success('Login successful!')
-        router.push('/admin/dashboard')
-      } else {
+  clearAllState()
+  
+  // Store token EVERYWHERE for maximum persistence
+  const token = data.token
+  if (typeof window !== 'undefined') {
+    sessionStorage.setItem('admin_token', token)
+    localStorage.setItem('admin_token', token)
+    // Cache auth state
+    sessionStorage.setItem('admin_auth_cache', JSON.stringify({
+      authenticated: true,
+      timestamp: Date.now(),
+    }))
+  }
+  // Cookie as backup
+  document.cookie = `admin_token=${token}; path=/; max-age=86400; SameSite=Lax`
+  
+  toast.success('Login successful!')
+  router.push('/admin/dashboard')
+}
+      else {
         toast.error(data.error || 'Invalid OTP')
       }
     } catch {
@@ -311,7 +335,7 @@ export default function AdminLoginPage() {
             </div>
           </motion.div>
           <h1 className="text-2xl font-bold text-white">Admin Panel</h1>
-          <p className="text-gray-400 text-sm mt-1">Volleyball Tournament 2026</p>
+          <p className="text-gray-400 text-md mt-1">नयाँ बस्ती खुल्ला भलिबल प्रतियोगिता-२०८३</p>
         </div>
 
         <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">

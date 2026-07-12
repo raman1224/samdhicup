@@ -77,7 +77,7 @@ export default async function PaymentsPage() {
                     </>
                   )}
                   <Link href={`/admin/dashboard/teams/${payment.teamId}`}>
-                    <Button size="sm" variant="outline" className="border-gray-700 text-white">
+                    <Button size="sm" variant="outline" className="border-gray-700 text-black font-bold">
                       <Eye className="w-3 h-3 mr-1" /> View Team
                     </Button>
                   </Link>

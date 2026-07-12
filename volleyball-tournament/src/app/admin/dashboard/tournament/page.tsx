@@ -30,7 +30,7 @@ export default function TournamentPage() {
           <InfoRow label="Prize Pool" value="NPR 1,40,000" />
           <InfoRow label="Start Date" value="Ashoj 29, 2083" />
           <InfoRow label="End Date" value="Kartik 02, 2083" />
-          <InfoRow label="Venue" value="Chauri Deurali Municipal-06, Kavrapalanchok" />
+          <InfoRow label="Venue" value="Chauri Deurali, Kavrapalanchok" />
           <InfoRow label="Max Teams" value="32" />
           <InfoRow label="Players per Team" value="10" />
         </CardContent>

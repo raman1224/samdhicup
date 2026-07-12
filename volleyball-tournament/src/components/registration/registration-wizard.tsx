@@ -326,7 +326,7 @@ const handleSubmit = useCallback(async () => {
     <FormProvider {...methods}>
       <div ref={topRef} className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
         {/* Sticky Header */}
-        <div className="sticky top-16 z-40 bg-gray-900/95 backdrop-blur-md border-b border-gray-800/50">
+        <div className="sticky top-16 z-30 bg-gray-900/95 backdrop-blur-md border-b border-gray-800/50">
           <div className="max-w-2xl mx-auto px-4 py-3">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
@@ -446,4 +446,3 @@ const handleSubmit = useCallback(async () => {
   )
 }
 
-// date 

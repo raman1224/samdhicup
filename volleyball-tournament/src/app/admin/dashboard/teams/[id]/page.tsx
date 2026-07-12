@@ -36,45 +36,124 @@ export default function TeamDetailPage() {
     if (id) fetchTeam()
   }, [id])
 
+  // const fetchTeam = async () => {
+  //   try {
+  //     const res = await fetch(`/api/admin/teams/${id}`)
+  //     const data = await res.json()
+  //     if (data.success) setTeam(data.team)
+  //   } catch (err) {
+  //     console.error('Failed to fetch team:', err)
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
+
+  // const handleAction = async (action: string, body?: any) => {
+  //   setActionLoading(action)
+  //   try {
+  //     const res = await fetch(`/api/admin/teams/${id}/${action}`, {
+  //       method: action === 'delete' ? 'DELETE' : 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: body ? JSON.stringify(body) : undefined,
+  //     })
+  //     const data = await res.json()
+  //     if (data.success) {
+  //       toast.success(data.message)
+  //       if (action === 'delete') {
+  //         router.push('/admin/dashboard/teams')
+  //       } else {
+  //         fetchTeam()
+  //         setShowRejectModal(false)
+  //       }
+  //     } else {
+  //       toast.error(data.error || 'Action failed')
+  //     }
+  //   } catch {
+  //     toast.error('Network error')
+  //   } finally {
+  //     setActionLoading(null)
+  //   }
+  // }
+
   const fetchTeam = async () => {
+    setLoading(true)
     try {
-      const res = await fetch(`/api/admin/teams/${id}`)
+      const token = sessionStorage.getItem('admin_token') || ''
+      
+      const res = await fetch(`/api/admin/teams/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+      })
+      
+      if (!res.ok) {
+        if (res.status === 401) {
+          toast.error('Session expired. Please login again.')
+          router.push('/admin/login')
+          return
+        }
+        throw new Error('Failed to fetch team')
+      }
+      
       const data = await res.json()
-      if (data.success) setTeam(data.team)
+      if (data.success) {
+        setTeam(data.team)
+      } else {
+        toast.error(data.error || 'Failed to load team')
+      }
     } catch (err) {
       console.error('Failed to fetch team:', err)
+      toast.error('Failed to load team details')
     } finally {
       setLoading(false)
     }
   }
-
+  
   const handleAction = async (action: string, body?: any) => {
     setActionLoading(action)
     try {
+      const token = sessionStorage.getItem('admin_token') || ''
+      
       const res = await fetch(`/api/admin/teams/${id}/${action}`, {
         method: action === 'delete' ? 'DELETE' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
         body: body ? JSON.stringify(body) : undefined,
       })
+      
       const data = await res.json()
+      
       if (data.success) {
         toast.success(data.message)
+        
         if (action === 'delete') {
-          router.push('/admin/dashboard/teams')
+          // Small delay before redirect
+          setTimeout(() => {
+            router.push('/admin/dashboard/teams')
+          }, 500)
         } else {
-          fetchTeam()
+          // Close modals first
           setShowRejectModal(false)
+          setRejectReason('')
+          // Refresh team data with small delay to ensure DB updated
+          setTimeout(() => {
+            fetchTeam()
+          }, 300)
         }
       } else {
         toast.error(data.error || 'Action failed')
       }
-    } catch {
-      toast.error('Network error')
+    } catch (err) {
+      console.error('Action error:', err)
+      toast.error('Network error. Please try again.')
     } finally {
       setActionLoading(null)
     }
   }
-
   const togglePlayerExpand = (playerId: string) => {
     setExpandedPlayers(prev => {
       const next = new Set(prev)
@@ -237,21 +316,21 @@ export default function TeamDetailPage() {
           </>
         )}
         <a href={`/api/admin/teams/${id}/pdf`} download>
-          <Button variant="outline" className="border-gray-700 text-white">
+          <Button variant="outline" className="border-gray-700 text-black font-bold">
             <Download className="w-4 h-4 mr-1" /> Download PDF
           </Button>
         </a>
         <a href={`mailto:${team.captainEmail}`}>
-          <Button variant="outline" className="border-gray-700 text-white">
+          <Button variant="outline" className="border-gray-700 text-black font-bold">
             <Mail className="w-4 h-4 mr-1" /> Email
           </Button>
         </a>
         <a href={`tel:${team.captainPhone}`}>
-          <Button variant="outline" className="border-gray-700 text-white">
+          <Button variant="outline" className="border-gray-700 text-black font-bold">
             <Phone className="w-4 h-4 mr-1" /> Call
           </Button>
         </a>
-        <Button onClick={() => setShowDeleteConfirm(true)} variant="outline" className="border-red-800 text-red-400 hover:bg-red-500/10">
+        <Button onClick={() => setShowDeleteConfirm(true)} variant="outline" className="border-red-800 text-red-400 font-bold hover:bg-red-500/10">
           <Trash2 className="w-4 h-4 mr-1" /> Delete
         </Button>
       </div>
@@ -285,7 +364,7 @@ export default function TeamDetailPage() {
                 <Button onClick={() => handleAction('delete')} disabled={!!actionLoading} variant="destructive" className="flex-1">
                   {actionLoading === 'delete' ? <Loader2 className="w-4 h-4 mr-1 animate-spin" /> : <Trash2 className="w-4 h-4 mr-1" />} Delete
                 </Button>
-                <Button onClick={() => setShowDeleteConfirm(false)} variant="outline" className="border-gray-700 text-white">Cancel</Button>
+                <Button onClick={() => setShowDeleteConfirm(false)} variant="outline" className="border-gray-700 text-black font-bold">Cancel</Button>
               </div>
             </CardContent>
           </Card>

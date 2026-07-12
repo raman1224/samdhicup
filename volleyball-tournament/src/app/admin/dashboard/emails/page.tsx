@@ -68,13 +68,13 @@ export default function EmailsPage() {
                 required
               />
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               <Button type="submit" disabled={loading} className="bg-gradient-to-r from-orange-500 to-red-600 text-white">
-                {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Send className="w-4 h-4 mr-2" />}
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4 mr-2" />}
                 Send to All Teams
               </Button>
-              <Button type="button" variant="outline" className="border-gray-700 text-white">
-                <Users className="w-4 h-4 mr-2" />
+              <Button type="button" variant="outline" className="border-gray-700 text-black font-bold">
+                <Users className="w-4 h-4 " />
                 Select Teams
               </Button>
             </div>

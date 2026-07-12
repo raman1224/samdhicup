@@ -24,16 +24,41 @@ const Contact = memo(function Contact() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    toast.success('Message sent successfully! We will get back to you soon.')
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  
+  const form = e.target as HTMLFormElement
+  const formData = new FormData(form)
+  const name = formData.get('name') as string
+  const email = formData.get('email') as string
+  const message = formData.get('message') as string
+
+  if (!name || !email || !message) {
+    toast.error('Please fill all fields')
+    return
+  }
+
+  setLoading(true)
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message }),
+    })
+    const data = await res.json()
+
+    if (data.success) {
+      toast.success(data.message)
+      form.reset()
+    } else {
+      toast.error(data.error || 'Failed to send message')
+    }
+  } catch {
+    toast.error('Network error. Please try again.')
+  } finally {
     setLoading(false)
   }
+}
 
   const contactInfo = [
     {
@@ -109,60 +134,52 @@ const Contact = memo(function Contact() {
           >
             <Card className="bg-gray-800/50 border-gray-700">
               <CardContent className="p-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="text-sm text-gray-400 mb-1 block">Name</label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
-                      <Input
-                        placeholder="Your name"
-                        className="bg-gray-900 border-gray-700 text-white pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
+<form onSubmit={handleSubmit} className="space-y-4">
+  <div>
+    <label className="text-sm text-gray-400 mb-1 block">Name</label>
+    <div className="relative">
+      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+      <Input
+        name="name"
+        placeholder="Your name"
+        className="bg-gray-900 border-gray-700 text-white pl-10"
+        required
+      />
+    </div>
+  </div>
 
-                  <div>
-                    <label className="text-sm text-gray-400 mb-1 block">Email</label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
-                      <Input
-                        type="email"
-                        placeholder="Your email"
-                        className="bg-gray-900 border-gray-700 text-white pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
+  <div>
+    <label className="text-sm text-gray-400 mb-1 block">Email</label>
+    <div className="relative">
+      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+      <Input
+        name="email"
+        type="email"
+        placeholder="Your email"
+        className="bg-gray-900 border-gray-700 text-white pl-10"
+        required
+      />
+    </div>
+  </div>
 
-                  <div>
-                    <label className="text-sm text-gray-400 mb-1 block">Message</label>
-                    <Textarea
-                      placeholder="Your message"
-                      className="bg-gray-900 border-gray-700 text-white min-h-[120px]"
-                      required
-                    />
-                  </div>
+  <div>
+    <label className="text-sm text-gray-400 mb-1 block">Message</label>
+    <Textarea
+      name="message"
+      placeholder="Your message"
+      className="bg-gray-900 border-gray-700 text-white min-h-[120px]"
+      required
+    />
+  </div>
 
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-6"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
+  <Button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-6">
+    {loading ? (
+      <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Sending...</>
+    ) : (
+      <><Send className="w-4 h-4 mr-2" /> Send Message</>
+    )}
+  </Button>
+</form>              </CardContent>
             </Card>
           </motion.div>
 
