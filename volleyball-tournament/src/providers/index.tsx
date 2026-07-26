@@ -1,14 +1,12 @@
-
-
 'use client'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { useState, useEffect } from 'react'
+import { ThemeProvider } from 'next-themes'
+import { useState } from 'react'
+import { LanguageProvider } from './language-provider'
+import { type ReactNode } from 'react'
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false)
-  
+export function Providers({ children, locale }: { children: ReactNode; locale?: string }) {
   const [queryClient] = useState(
     () => new QueryClient({
       defaultOptions: {
@@ -22,21 +20,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
     })
   )
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   return (
     <QueryClientProvider client={queryClient}>
-      <NextThemesProvider
+      <ThemeProvider
         attribute="class"
         defaultTheme="dark"
         enableSystem={false}
-        disableTransitionOnChange
         storageKey="vb-theme"
       >
-        {mounted ? children : <div style={{ visibility: 'hidden' }}>{children}</div>}
-      </NextThemesProvider>
+        <LanguageProvider initialLocale={locale || 'en'}>
+          {children}
+        </LanguageProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   )
 }

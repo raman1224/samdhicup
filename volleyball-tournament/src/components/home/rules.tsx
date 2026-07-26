@@ -1,9 +1,11 @@
+
 'use client'
 
 import { memo, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { useTranslations } from 'next-intl'
 import { 
   ScrollText, 
   Shield, 
@@ -17,86 +19,88 @@ import {
 } from 'lucide-react'
 
 const Rules = memo(function Rules() {
+  const t = useTranslations('rules')
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  // Rule categories with translatable titles
   const ruleCategories = [
     {
       icon: Users,
-      title: 'Team Composition',
+      titleKey: 'teamComposition',
       color: 'text-blue-400',
       bgColor: 'bg-blue-500/10',
       borderColor: 'border-blue-500/30',
-      rules: [
-        'Each team must have exactly 10 registered players',
-        '6 players on court, 4 substitutes',
-        'Teams can substitute players between sets',
-        'Libero player must wear contrasting jersey',
+      rulesKeys: [
+        'teamCompositionRule1',
+        'teamCompositionRule2',
+        'teamCompositionRule3',
+        'teamCompositionRule4',
       ],
     },
     {
       icon: Shield,
-      title: 'Match Rules',
+      titleKey: 'matchRules',
       color: 'text-green-400',
       bgColor: 'bg-green-500/10',
       borderColor: 'border-green-500/30',
-      rules: [
-        'Best of 5 sets format',
-        'First 4 sets: 25 points (win by 2)',
-        'Fifth set: 15 points (win by 2)',
-        'Rally point scoring system',
+      rulesKeys: [
+        'matchRulesRule1',
+        'matchRulesRule2',
+        'matchRulesRule3',
+        'matchRulesRule4',
       ],
     },
     {
       icon: Timer,
-      title: 'Time Regulations',
+      titleKey: 'timeRegulations',
       color: 'text-yellow-400',
       bgColor: 'bg-yellow-500/10',
       borderColor: 'border-yellow-500/30',
-      rules: [
-        'Teams must arrive 30 minutes before match',
-        '2 timeouts per set (30 seconds each)',
-        '3 minute warm-up before each match',
-        'Technical timeout at 8 and 16 points',
+      rulesKeys: [
+        'timeRegulationsRule1',
+        'timeRegulationsRule2',
+        'timeRegulationsRule3',
+        'timeRegulationsRule4',
       ],
     },
     {
       icon: AlertTriangle,
-      title: 'Disqualification Rules',
+      titleKey: 'disqualificationRules',
       color: 'text-red-400',
       bgColor: 'bg-red-500/10',
       borderColor: 'border-red-500/30',
-      rules: [
-        'Unsportsmanlike conduct leads to yellow card',
-        'Two yellow cards = red card (disqualification)',
-        'Fighting leads to immediate team disqualification',
-        'False player information = team disqualification',
+      rulesKeys: [
+        'disqualificationRule1',
+        'disqualificationRule2',
+        'disqualificationRule3',
+        'disqualificationRule4',
       ],
     },
     {
       icon: UserCheck,
-      title: 'Player Eligibility',
+      titleKey: 'playerEligibility',
       color: 'text-purple-400',
       bgColor: 'bg-purple-500/10',
       borderColor: 'border-purple-500/30',
-      rules: [
-        'Players must be 16-50 years old',
-        'Valid ID proof required for verification',
-        'One player can only represent one team',
-        'Injured players can be replaced with approval',
+      rulesKeys: [
+        'playerEligibilityRule1',
+        'playerEligibilityRule2',
+        'playerEligibilityRule3',
+        'playerEligibilityRule4',
       ],
     },
     {
       icon: Ban,
-      title: 'Prohibited Actions',
+      titleKey: 'prohibitedActions',
       color: 'text-orange-400',
       bgColor: 'bg-orange-500/10',
       borderColor: 'border-orange-500/30',
-      rules: [
-        'No jewelry or accessories during play',
-        'No outside coaching during live play',
-        'No recording opponent strategies',
-        'No consumption of alcohol/drugs',
+      rulesKeys: [
+        'prohibitedActionsRule1',
+        'prohibitedActionsRule2',
+        'prohibitedActionsRule3',
+        'prohibitedActionsRule4',
       ],
     },
   ]
@@ -118,6 +122,7 @@ const Rules = memo(function Rules() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -126,23 +131,24 @@ const Rules = memo(function Rules() {
         >
           <Badge className="mb-4 px-6 py-2 text-lg bg-orange-500/10 text-orange-400 border-orange-500/30">
             <ScrollText className="w-4 h-4 mr-2" />
-            Rules & Regulations
+            {t('badge')}
           </Badge>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Play by the{' '}
+            {t('title')}{' '}
             <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-              Rules
+              {t('highlight')}
             </span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Understanding the rules ensures fair play and exciting matches
+            {t('description')}
           </p>
         </motion.div>
 
+        {/* Rule Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {ruleCategories.map((category, index) => (
             <motion.div
-              key={category.title}
+              key={category.titleKey}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -158,21 +164,25 @@ const Rules = memo(function Rules() {
                     >
                       <category.icon className={`w-6 h-6 ${category.color}`} />
                     </motion.div>
-                    <span className="text-white">{category.title}</span>
+                    <span className="text-white">
+                      {t(category.titleKey)}
+                    </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {category.rules.map((rule, ruleIndex) => (
+                    {category.rulesKeys.map((ruleKey, ruleIndex) => (
                       <motion.li
-                        key={ruleIndex}
+                        key={ruleKey}
                         initial={{ opacity: 0, x: -20 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.3, delay: index * 0.1 + ruleIndex * 0.05 }}
                         className="flex items-start gap-2 text-gray-300"
                       >
                         <CheckCircle2 className={`w-4 h-4 mt-0.5 flex-shrink-0 ${category.color}`} />
-                        <span className="text-sm">{rule}</span>
+                        <span className="text-sm">
+                          {t(ruleKey)}
+                        </span>
                       </motion.li>
                     ))}
                   </ul>
@@ -192,11 +202,11 @@ const Rules = memo(function Rules() {
           <Card className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/30">
             <CardContent className="p-6 text-center">
               <AlertTriangle className="w-10 h-10 text-red-400 mx-auto mb-3" />
-              <h3 className="text-xl font-bold text-white mb-2">Important Notice</h3>
+              <h3 className="text-xl font-bold text-white mb-2">
+                {t('notice')}
+              </h3>
               <p className="text-gray-300 max-w-2xl mx-auto">
-                All teams must adhere to these rules. The tournament committee reserves the right 
-                to modify rules in the interest of fair play. Any disputes will be resolved by 
-                the committee, and their decision is final.
+                {t('noticeText')}
               </p>
             </CardContent>
           </Card>

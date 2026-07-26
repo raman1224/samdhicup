@@ -2,7 +2,7 @@
 'use client'
 
 import { useRef, useEffect, useState, useCallback } from 'react'
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
@@ -10,8 +10,11 @@ import { useDeviceType } from '@/hooks/useMediaQuery'
 import { useCountdown } from '@/hooks/useCountdown'
 import { Sparkles, Trophy, Users, Calendar, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 export default function HeroSection() {
+  const t = useTranslations('hero')
+  const countdownT = useTranslations('countdown')
   const { isMobile } = useDeviceType()
   const heroRef = useRef<HTMLDivElement>(null)
   const mouseX = useMotionValue(0)
@@ -50,9 +53,9 @@ export default function HeroSection() {
   const spotlightY = useTransform(mouseY, (y) => `${y}px`)
 
   const stats = [
-    { icon: Trophy, label: 'Prize Pool', value: 'रू 1,40,000+', color: 'text-yellow-400' },
-    { icon: Users, label: 'Expected Teams', value: '32+', color: 'text-blue-400' },
-    { icon: Calendar, label: 'Registration Closes In', value: `${days}d ${hours}h ${minutes}m`, color: 'text-green-400' },
+    { icon: Trophy, label: countdownT('prizePool'), value: 'रू 1,40,000+', color: 'text-yellow-400' },
+    { icon: Users, label: countdownT('expectedTeams'), value: '32+', color: 'text-blue-400' },
+    { icon: Calendar, label: countdownT('registrationCloses'), value: `${days}d ${hours}h ${minutes}m`, color: 'text-green-400' },
   ]
 
   return (
@@ -64,13 +67,13 @@ export default function HeroSection() {
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
         <Image
-    src="/hero-poster.png"
-    alt="Volleyball Tournament"
-    fill
-    className="object-cover "
-    priority
-    sizes="100vw"
-  />
+          src="/hero-poster.png"
+          alt={t('title1') + ' ' + t('title2')}
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
 
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/50 to-gray-900" />
         
@@ -149,29 +152,30 @@ export default function HeroSection() {
             className="mb-6 px-6 py-2 mt-4 text-base border-orange-500/50 bg-orange-500/10 text-orange-300"
           >
             <Sparkles className="w-4 h-4 mr-2" />
-            Season 2083
+            {t('badge')}
             <Sparkles className="w-4 h-4 ml-2" />
           </Badge>
         </motion.div>
 
-<motion.h1
-  className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter px-2"
-  initial={{ opacity: 0, y: 50 }}
-  animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-  transition={{ duration: 0.8, delay: 0.2 }}
->
-  <span className="bg-gradient-to-r from-orange-400 via-red-500 to-purple-600 bg-clip-text text-transparent block leading-tight">
-    नयाँ बस्ती खुल्ला
-  </span>
-  <motion.span
-    className="text-white block leading-tight"
-    initial={{ opacity: 0 }}
-    animate={isLoaded ? { opacity: 1 } : {}}
-    transition={{ duration: 1, delay: 0.5 }}
-  >
-    भलिबल प्रतियोगिता-२०८३
-  </motion.span>
-</motion.h1>
+        {/* Main Title */}
+        <motion.h1
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter px-2"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <span className="bg-gradient-to-r from-orange-400 via-red-500 to-purple-600 bg-clip-text text-transparent block leading-tight">
+            {t('title1')}
+          </span>
+          <motion.span
+            className="text-white block leading-tight"
+            initial={{ opacity: 0 }}
+            animate={isLoaded ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            {t('title2')}
+          </motion.span>
+        </motion.h1>
 
         {/* Subtitle */}
         <motion.p
@@ -180,10 +184,10 @@ export default function HeroSection() {
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Join the ultimate volleyball battle.{' '}
-          <span className="text-orange-400 font-semibold">32 Teams.</span>{' '}
-          <span className="text-red-400 font-semibold">One Champion.</span>{' '}
-          <span className="text-purple-400 font-semibold">Glory Awaits!</span>
+          {t('subtitle')}{' '}
+          <span className="text-orange-400 font-semibold">{t('teams')}</span>{' '}
+          <span className="text-red-400 font-semibold">{t('champion')}</span>{' '}
+          <span className="text-purple-400 font-semibold">{t('glory')}</span>
         </motion.p>
 
         {/* Stats */}
@@ -226,7 +230,7 @@ export default function HeroSection() {
               className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold px-8 md:px-12 py-6 md:py-7 text-base md:text-lg rounded-full shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/50 transition-all duration-300 hover:scale-105"
             >
               <Trophy className="w-5 h-5 mr-2" />
-              Register Your Team Now
+              {t('cta')}
             </Button>
           </Link>
           <Link href="#tournament-details">
@@ -235,7 +239,7 @@ export default function HeroSection() {
               variant="outline"
               className="border-2 border-white/30 hover:border-white/50 bg-white/5 backdrop-blur-sm text-white font-bold px-8 md:px-12 py-6 md:py-7 text-base md:text-lg rounded-full"
             >
-              Learn More
+              {t('learnMore')}
             </Button>
           </Link>
         </motion.div>

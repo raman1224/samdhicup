@@ -36,44 +36,6 @@ export default function TeamDetailPage() {
     if (id) fetchTeam()
   }, [id])
 
-  // const fetchTeam = async () => {
-  //   try {
-  //     const res = await fetch(`/api/admin/teams/${id}`)
-  //     const data = await res.json()
-  //     if (data.success) setTeam(data.team)
-  //   } catch (err) {
-  //     console.error('Failed to fetch team:', err)
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
-
-  // const handleAction = async (action: string, body?: any) => {
-  //   setActionLoading(action)
-  //   try {
-  //     const res = await fetch(`/api/admin/teams/${id}/${action}`, {
-  //       method: action === 'delete' ? 'DELETE' : 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: body ? JSON.stringify(body) : undefined,
-  //     })
-  //     const data = await res.json()
-  //     if (data.success) {
-  //       toast.success(data.message)
-  //       if (action === 'delete') {
-  //         router.push('/admin/dashboard/teams')
-  //       } else {
-  //         fetchTeam()
-  //         setShowRejectModal(false)
-  //       }
-  //     } else {
-  //       toast.error(data.error || 'Action failed')
-  //     }
-  //   } catch {
-  //     toast.error('Network error')
-  //   } finally {
-  //     setActionLoading(null)
-  //   }
-  // }
 
   const fetchTeam = async () => {
     setLoading(true)

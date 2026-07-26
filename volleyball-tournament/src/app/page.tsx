@@ -19,10 +19,6 @@ const Sponsors = dynamic(() => import("@/components/home/sponsors"), {
   loading: () => <LoadingSkeleton height="300px" />,
 });
 
-const Gallery = dynamic(() => import("@/components/home/gallery"), {
-  loading: () => <LoadingSkeleton height="500px" />,
-});
-
 const Schedule = dynamic(() => import("@/components/home/schedule"), {
   loading: () => <LoadingSkeleton height="400px" />,
 });
@@ -67,9 +63,6 @@ export default function HomePage() {
       <Suspense fallback={<LoadingSkeleton height="300px" />}>
         <Sponsors />
       </Suspense>
-      {/* <Suspense fallback={<LoadingSkeleton height="500px" />}>
-        <Gallery />
-      </Suspense> */}
       <Suspense fallback={<LoadingSkeleton height="400px" />}>
         <Schedule />
       </Suspense>

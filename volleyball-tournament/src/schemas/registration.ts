@@ -1,6 +1,3 @@
-
-
-
 import { z } from 'zod'
 
 export const teamSchema = z.object({
