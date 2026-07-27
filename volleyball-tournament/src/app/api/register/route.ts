@@ -216,7 +216,7 @@ export async function POST(request: NextRequest) {
           registrationFee: 7000,
           maxPlayers: 10,
           isActive: true,
-          venue: 'चउरी देउराली गा.पा, देउराली -०६, नयाँ बस्ती, काभ्रपलाञ्चोक',
+          venue: 'चाैरी देउराली गा.पा, देउराली -०६, नयाँ बस्ती, काभ्रपलाञ्चोक',
           startDate: new Date('2026-10-16'),
           endDate: new Date('2026-10-19'),
           prizePool: 140000,

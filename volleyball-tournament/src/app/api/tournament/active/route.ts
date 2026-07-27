@@ -13,7 +13,7 @@ const tournamentData = {
   startDate: '2083-05-29',
   endDate: '2083-06-02',
   registrationDeadline: '2083-05-25',
-  venue: 'चउरी देउराली गा.पा, देउराली -०६, नयाँ बस्ती, काभ्रपलाञ्चोक',
+  venue: 'चाैरी देउराली गा.पा, देउराली -०६, नयाँ बस्ती, काभ्रपलाञ्चोक',
   maxTeams: 32,
   maxPlayers: 10,
   minPlayers: 10,

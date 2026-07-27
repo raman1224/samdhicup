@@ -51,7 +51,7 @@ const Venue = memo(function Venue() {
                 </div>
               </a>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-1">चउरी देउराली गा.पा, देउराली -०६</h3>
+                <h3 className="text-xl font-bold text-white mb-1">चाैरी देउराली गा.पा, देउराली -०६</h3>
                 <p className="text-gray-400 mb-1">नयाँ बस्ती, काभ्रपलाञ्चोक</p>
                 <p className="text-gray-400 text-sm flex items-center gap-1"><MapPin className="w-3 h-3" /> नेपाल</p>
                 <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-3 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"><Navigation className="w-3.5 h-3.5" />{t('viewMaps')}<ExternalLink className="w-3 h-3" /></a>

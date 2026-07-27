@@ -1,6 +1,5 @@
 {
   "hero": {
-    "badge": "Season 2083",
     "title1": "Naya Basti Khulla",
     "title2": "Volleyball Tournament-2083",
     "subtitle": "Join the ultimate volleyball battle.",
@@ -18,8 +17,8 @@
     "contact": "Contact",
     "admin": "Admin Login",
     "registerNow": "Register Now",
-    "brand": "नयाँ बस्ती खुल्ला",
-    "brandSub": "भलिबल प्रतियोगिता-२०८३"
+    "brand": "Naya Basti Khula",
+    "brandSub": "Volleyball Tournament-2083"
   },
   "prizePool": {
     "badge": "Prize Pool",
@@ -269,8 +268,8 @@
   },
 
   "footer": {
-    "brand": "नयाँ बस्ती खुल्ला",
-    "brandSub": "भलिबल प्रतियोगिता-२०८३",
+    "brand": "Naya Basti Khula",
+    "brandSub": "Volleyball Tournament-2083",
     "description": "The biggest volleyball tournament bringing together teams from across the nation. Experience the thrill of competitive volleyball.",
     "location": "Kavrepalanchok, Nepal",
     "quickLinks": "Quick Links",
@@ -316,7 +315,7 @@
     "date": "Date",
     "dateValue": "Ashoj 29 - Kartik 02, 2083",
     "venue": "Venue",
-    "venueValue": "चउरी देउराली, नयाँ बस्ती, काभ्रेपलाञ्चोक",
+    "venueValue": "Chauri Deurali, Naya Basti, Kavrepalanchok",
     "fee": "Fee",
     "feeValue": "NPR 7,000",
     "teamSize": "Team Size",

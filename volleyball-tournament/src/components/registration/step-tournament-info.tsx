@@ -111,7 +111,7 @@
 //               <MapPin className="w-4 h-4 text-red-400 flex-shrink-0" />
 //               <div>
 //                 <div className="text-[10px] text-gray-500">Venue</div>
-//                 <div className="text-white text-xs font-medium">चउरी देउराली, नयाँ बस्ती, काभ्रेपलाञ्‍चोक</div>
+//                 <div className="text-white text-xs font-medium">चाैरी देउराली, नयाँ बस्ती, काभ्रेपलाञ्‍चोक</div>
 //               </div>
 //             </div>
 

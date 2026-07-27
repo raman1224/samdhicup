@@ -172,18 +172,6 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ email, otp }),
       })
       const data = await res.json()
-
-      // if (data.success) {
-      //   clearAllState()
-      //   // Store token for auth check
-      //   if (typeof window !== 'undefined') {
-      //     sessionStorage.setItem('admin_token', data.token)
-      //   }
-      //   document.cookie = `admin_token=${data.token}; path=/; max-age=86400; SameSite=Lax`
-      //   toast.success('Login successful!')
-      //   router.push('/admin/dashboard')
-      // } 
-
       //new
       if (data.success) {
   clearAllState()
@@ -416,7 +404,7 @@ export default function AdminLoginPage() {
                       Code sent to <span className="text-orange-400">{email}</span>
                     </p>
                     <p className="text-gray-500 text-[11px] mt-1">
-                      📧 Open Gmail → Copy 6-digit code → Paste here
+                      📧 Open Gmail → Copy 6-digit code → Paste here or look notification
                     </p>
                     {countdown > 0 && (
                       <p className="text-yellow-400 text-xs mt-1">

@@ -140,26 +140,11 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Content */}
-      <div className="relative z-30 container mx-auto px-4 text-center">
-        {/* Tournament Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <Badge
-            variant="outline"
-            className="mb-6 px-6 py-2 mt-4 text-base border-orange-500/50 bg-orange-500/10 text-orange-300"
-          >
-            <Sparkles className="w-4 h-4 mr-2" />
-            {t('badge')}
-            <Sparkles className="w-4 h-4 ml-2" />
-          </Badge>
-        </motion.div>
+      <div className="relative z-30 container mx-auto px-4 text-center pt-4 ">
 
         {/* Main Title */}
         <motion.h1
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter px-2"
+  className="mt-4 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-2 tracking-tighter px-2"
           initial={{ opacity: 0, y: 50 }}
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}

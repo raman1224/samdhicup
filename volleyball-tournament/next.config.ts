@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         turbopack: {
     root: __dirname, // forces this folder as the project root
   },
-    allowedDevOrigins: ['192.168.1.75'],
+    allowedDevOrigins: ['192.168.1.65'],
   images: {
     remotePatterns: [
       {
