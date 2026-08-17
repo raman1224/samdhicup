@@ -31,7 +31,7 @@
 //         data: {
 //           year: 2026,
 //           name: 'नयाँ बस्ती खुल्ला भलिबल प्रतियोगिता-२०८३',
-//           registrationFee: 7000,
+//           registrationFee: 000,
 //           maxPlayers: 10,
 //           isActive: true,
 //           venue: 'Kavrepalanchok, Nepal',
@@ -213,7 +213,7 @@ export async function POST(request: NextRequest) {
         data: {
           year: 2026,
           name: 'नयाँ बस्ती खुल्ला भलिबल प्रतियोगिता-२०८३',
-          registrationFee: 7000,
+          registrationFee: 8000,
           maxPlayers: 10,
           isActive: true,
           venue: 'चाैरी देउराली गा.पा, देउराली -०६, नयाँ बस्ती, काभ्रपलाञ्चोक',

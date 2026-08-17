@@ -26,7 +26,7 @@ export default function TournamentPage() {
           <InfoRow label="Name" value="Volleyball Championship 2083" />
           <InfoRow label="Year" value="2083" />
           <InfoRow label="Status" value="Active" badge="bg-green-500/20 text-green-400" />
-          <InfoRow label="Registration Fee" value="NPR 7,000" />
+          <InfoRow label="Registration Fee" value="NPR 8,000" />
           <InfoRow label="Prize Pool" value="NPR 1,40,000" />
           <InfoRow label="Start Date" value="Ashoj 29, 2083" />
           <InfoRow label="End Date" value="Kartik 02, 2083" />

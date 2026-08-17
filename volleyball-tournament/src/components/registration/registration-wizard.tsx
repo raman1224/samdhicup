@@ -67,7 +67,7 @@
 //   payment: {
 //     transactionId: '',
 //     paymentMethod: 'esewa' as const,
-//     amount: 7000,
+//     amount: 8000,
 //     screenshot: '',
 //   },
 // }
@@ -476,7 +476,7 @@ const STORAGE_COMPLETED = 'vb-reg-completed'
 const defaultValues: RegistrationFormInput = {
   team: { teamName: '', teamLogo: '', captainName: '', captainPhone: '', captainEmail: '', district: '', municipality: '', address: '', motto: '', description: '' },
   players: Array.from({ length: 10 }, () => ({ fullName: '', dateOfBirth: '', age: 18, phoneNumber: '', address: '', position: 'setter' as const, jerseyName: '', jerseyNumber: null, jerseySize: 'M' as const, passportPhoto: '', citizenshipFront: '', citizenshipBack: '' })),
-  payment: { transactionId: '', paymentMethod: 'esewa' as const, amount: 7000, screenshot: '' },
+  payment: { transactionId: '', paymentMethod: 'esewa' as const, amount: 8000, screenshot: '' },
 }
 
 export default function RegistrationWizard() {

@@ -24,7 +24,7 @@
 //           <div className="text-center p-4 rounded-xl bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20">
 //             <p className="text-sm text-gray-400">Registration Fee</p>
 //             <p className="text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-//               NPR 7,000
+//               NPR 8,000
 //             </p>
 //             <p className="text-xs text-gray-500 mt-1">Per team • Non-refundable</p>
 //           </div>
@@ -114,7 +114,7 @@ const StepPayment = memo(function StepPayment() {
         <CardContent className="p-4 sm:p-6 space-y-5">
           <div className="text-center p-4 rounded-xl bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20">
             <p className="text-sm text-gray-400">{t('registrationFee')}</p>
-            <p className="text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">NPR 7,000</p>
+            <p className="text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">NPR 8,000</p>
             <p className="text-xs text-gray-500 mt-1">{t('perTeam')}</p>
           </div>
           <PaymentQR onMethodSelect={(method) => setValue('payment.paymentMethod', method)} selectedMethod={paymentMethod ?? ''} />

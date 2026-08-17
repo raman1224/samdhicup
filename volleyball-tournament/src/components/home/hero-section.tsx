@@ -170,7 +170,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           {t('subtitle')}{' '}
-          <span className="text-orange-400 font-semibold">{t('teams')}</span>{' '}
+          {/* <span className="text-orange-400 font-semibold">{t('teams')}</span>{' '} */}
           <span className="text-red-400 font-semibold">{t('champion')}</span>{' '}
           <span className="text-purple-400 font-semibold">{t('glory')}</span>
         </motion.p>

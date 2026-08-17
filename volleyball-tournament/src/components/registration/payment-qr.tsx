@@ -142,7 +142,7 @@
 //               </div>
 
 //               <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/50 w-full justify-center py-2 text-sm">
-//                 Amount: NPR 7,000
+//                 Amount: NPR 8,000
 //               </Badge>
 //             </CardContent>
 //           </Card>
@@ -190,7 +190,7 @@
 //               </div>
 
 //               <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/50 w-full justify-center py-2 text-sm mt-2">
-//                 Amount: NPR 7,000
+//                 Amount: NPR 8,000
 //               </Badge>
 //             </CardContent>
 //           </Card>

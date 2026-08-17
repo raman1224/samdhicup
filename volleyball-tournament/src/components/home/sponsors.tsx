@@ -12,18 +12,18 @@ const Sponsors = memo(function Sponsors() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  const sponsors = [
-    { name: 'Xtreme Energy Drink', type: 'Title Sponsor', tier: 'platinum' },
-    { name: 'Neplays TV', type: 'Media Partner', tier: 'partner' },
-    { name: 'Himal Beverages', type: 'Refreshment Partner', tier: 'silver' },
-    { name: 'Kathmandu Telecom', type: 'Connectivity Partner', tier: 'bronze' },
-  ]
+  // const sponsors = [
+    // { name: 'Wating', type: 'Title Sponsor', tier: 'platinum' },
+    // { name: 'Neplays TV', type: 'Media Partner', tier: 'partner' },
+    // { name: 'Himal Beverages', type: 'Refreshment Partner', tier: 'silver' },
+    // { name: 'Kathmandu Telecom', type: 'Connectivity Partner', tier: 'bronze' },
+  // ]
 
   const partners = [
     { name: 'Volleyball Association', role: 'Organizing Partner' },
     { name: 'Sports Authority', role: 'Government Partner' },
     { name: 'Local Municipality', role: 'Venue Partner' },
-    { name: 'Red Cross Nepal', role: 'Medical Partner' },
+    { name: 'Medicare Nepal', role: 'Medical Partner' },
   ]
 
   const getTierColor = (tier: string) => {
@@ -57,7 +57,7 @@ const Sponsors = memo(function Sponsors() {
 
   const handlePointerEnter = useCallback(() => setIsHovering(true), [])
   const handlePointerLeave = useCallback(() => setIsHovering(false), [])
-  const marqueeItems = [...sponsors, ...sponsors]
+  // const marqueeItems = [...sponsors, ...sponsors]
 
   return (
     <section ref={ref} id="sponsors" className="py-20 relative overflow-hidden">
@@ -70,7 +70,7 @@ const Sponsors = memo(function Sponsors() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">{t('title')} <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">{t('highlight')}</span></h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">{t('description')}</p>
         </motion.div>
-        <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.3 }} className="relative mb-16">
+        {/* <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.3 }} className="relative mb-16">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-32 z-10 bg-gradient-to-r from-gray-900 to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-32 z-10 bg-gradient-to-l from-gray-900 to-transparent" />
           <div className="overflow-hidden" onMouseEnter={handlePointerEnter} onMouseLeave={handlePointerLeave} onTouchStart={handlePointerEnter} onTouchEnd={handlePointerLeave}>
@@ -86,7 +86,7 @@ const Sponsors = memo(function Sponsors() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.6 }}>
           <h3 className="text-2xl font-bold text-white text-center mb-8">{t('ourPartners')}</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

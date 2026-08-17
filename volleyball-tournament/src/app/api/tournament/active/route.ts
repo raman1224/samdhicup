@@ -5,7 +5,7 @@ const tournamentData = {
   id: '1',
   name: 'Volleyball Championship 2083',
   year: 2083,
-  registrationFee: 7000,
+  registrationFee: 8000,
   prizePool: 140000,
   winnerPrize: 80000,
   runnerUpPrize: 40000,

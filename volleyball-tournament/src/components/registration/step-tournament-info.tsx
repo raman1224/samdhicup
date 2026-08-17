@@ -119,7 +119,7 @@
 //               <DollarSign className="w-4 h-4 text-green-400 flex-shrink-0" />
 //               <div>
 //                 <div className="text-[10px] text-gray-500">Fee</div>
-//                 <div className="text-white text-xs font-medium">NPR 7,000</div>
+//                 <div className="text-white text-xs font-medium">NPR 8,000</div>
 //               </div>
 //             </div>
 

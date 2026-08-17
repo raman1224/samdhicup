@@ -27,10 +27,9 @@ const Footer = memo(function Footer() {
       { label: t('venue'), href: '#venue' },
     ],
     social: [
-      { icon: FaFacebook, href: '#', label: 'Facebook' },
+      { icon: FaFacebook, href: 'https://www.facebook.com/profile.php?id=61563222866933', label: 'Facebook' },
       { icon: FaInstagram, href: '#', label: 'Instagram' },
       { icon: FaYoutube, href: '#', label: 'YouTube' },
-      { icon: FaTwitter, href: '#', label: 'Twitter' },
     ],
   }
 

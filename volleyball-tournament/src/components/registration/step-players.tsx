@@ -146,8 +146,11 @@ const StepPlayers = memo(function StepPlayers() {
             <div className="p-2 rounded-lg bg-gray-900/50"><div className="text-blue-400 font-bold text-lg">{stats.withPhoto}</div><div className="text-gray-500">{t('photos')}</div></div>
           </div>
           <div className="space-y-2">{players.map((_, index) => (<PlayerCard key={index} index={index} isExpanded={expandedPlayer === index} onToggle={() => handleToggle(index)} />))}</div>
-          {stats.remaining > 0 && <p className="text-yellow-400 text-xs text-center">{t('morePlayersNeeded', { count: stats.remaining })}</p>}
-        </CardContent>
+{stats.remaining > 0 && (
+  <p className="text-yellow-400 text-xs text-center">
+    {t('morePlayersNeeded', { count: stats.remaining })}
+  </p>
+)}        </CardContent>
       </Card>
     </motion.div>
   )
