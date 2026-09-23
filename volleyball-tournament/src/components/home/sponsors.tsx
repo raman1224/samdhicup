@@ -22,7 +22,7 @@ const Sponsors = memo(function Sponsors() {
   const partners = [
     { name: 'Volleyball Association', role: 'Organizing Partner' },
     { name: 'Sports Authority', role: 'Government Partner' },
-    { name: 'Local Municipality', role: 'Venue Partner' },
+    { name: 'Chaurideurali Rural Municipality', role: 'Venue Partner' },
     { name: 'Medicare Nepal', role: 'Medical Partner' },
   ]
 

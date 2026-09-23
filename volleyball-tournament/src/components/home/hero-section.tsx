@@ -30,7 +30,7 @@ export default function HeroSection() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 100])
 
-  const tournamentDate = new Date('2026-10-26T00:00:00')
+  const tournamentDate = new Date('2026-10-12T00:00:00Z') // Replace with your tournament date
   const { days, hours, minutes, seconds } = useCountdown(tournamentDate)
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function HeroSection() {
   const stats = [
     { icon: Trophy, label: countdownT('prizePool'), value: 'रू 1,40,000+', color: 'text-yellow-400' },
     { icon: Users, label: countdownT('expectedTeams'), value: '32+', color: 'text-blue-400' },
-    { icon: Calendar, label: countdownT('registrationCloses'), value: `${days}d ${hours}h ${minutes}m`, color: 'text-green-400' },
+    { icon: Calendar, label: countdownT('registrationCloses'), value: `${days}d ${hours}h ${minutes}m ${seconds}s`, color: 'text-green-400' },
   ]
 
   return (

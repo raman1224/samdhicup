@@ -14,12 +14,12 @@ const Schedule = memo(function Schedule() {
 
   const timeline = [
     { phase: t('phase1'), title: t('registrationOpens'), date: 'Bhadra 02, 2083', time: '9:00 AM', description: t('regOpensDesc'), status: t('status'), color: 'text-blue-400', bgColor: 'bg-blue-500/10', borderColor: 'border-blue-500/30', icon: Calendar },
-    { phase: t('phase2'), title: t('registrationCloses'), date: 'Ashoj 25, 2083', time: '11:59 PM', description: t('regClosesDesc'), status: t('status'), color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30', icon: Clock },
-    { phase: t('phase3'), title: t('fixtureAnnouncement'), date: 'Ashoj 27, 2083', time: '12:00 PM', description: t('fixtureDesc'), status: t('status'), color: 'text-purple-400', bgColor: 'bg-purple-500/10', borderColor: 'border-purple-500/30', icon: Trophy },
+    { phase: t('phase2'), title: t('registrationCloses'), date: 'Ashoj 26, 2083', time: '11:59 PM', description: t('regClosesDesc'), status: t('status'), color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30', icon: Clock },
+    { phase: t('phase3'), title: t('fixtureAnnouncement'), date: 'Ashoj 29, 2083', time: '12:00 PM', description: t('fixtureDesc'), status: t('status'), color: 'text-purple-400', bgColor: 'bg-purple-500/10', borderColor: 'border-purple-500/30', icon: Trophy },
     { phase: t('phase4'), title: t('openingCeremony'), date: 'Ashoj 29, 2083', time: '9:00 AM', description: t('openingDesc'), status: t('status'), color: 'text-orange-400', bgColor: 'bg-orange-500/10', borderColor: 'border-orange-500/30', icon: MapPin },
-    { phase: t('phase5'), title: t('groupStage'), date: 'Ashoj 29-31, 2083', time: '9:00 AM - 6:00 PM', description: t('groupDesc'), status: t('status'), color: 'text-green-400', bgColor: 'bg-green-500/10', borderColor: 'border-green-500/30', icon: Circle },
-    { phase: t('phase6'), title: t('knockoutStage'), date: 'Kartik 01, 2083', time: '9:00 AM - 6:00 PM', description: t('knockoutDesc'), status: t('status'), color: 'text-red-400', bgColor: 'bg-red-500/10', borderColor: 'border-red-500/30', icon: Circle },
-    { phase: t('phase7'), title: t('finals'), date: 'Kartik 02, 2083', time: '10:00 AM - 8:00 PM', description: t('finalsDesc'), status: t('status'), color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30', icon: Trophy },
+    { phase: t('phase5'), title: t('groupStage'), date: 'Ashoj 29-30, 2083', time: '9:00 AM - 6:00 PM', description: t('groupDesc'), status: t('status'), color: 'text-green-400', bgColor: 'bg-green-500/10', borderColor: 'border-green-500/30', icon: Circle },
+    { phase: t('phase6'), title: t('knockoutStage'), date: 'Kartik 31, 2083', time: '9:00 AM - 6:00 PM', description: t('knockoutDesc'), status: t('status'), color: 'text-red-400', bgColor: 'bg-red-500/10', borderColor: 'border-red-500/30', icon: Circle },
+    { phase: t('phase7'), title: t('finals'), date: 'Kartik 01, 2083', time: '10:00 AM - 5:00 PM', description: t('finalsDesc'), status: t('status'), color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30', icon: Trophy },
   ]
 
   return (

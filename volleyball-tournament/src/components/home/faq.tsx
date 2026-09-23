@@ -20,6 +20,7 @@ const FAQ = memo(function FAQ() {
     { icon: Trophy, question: t('q4'), answer: t('a4') },
     { icon: Shield, question: t('q5'), answer: t('a5') },
     { icon: MessageCircle, question: t('q6'), answer: t('a6') },
+    { icon: MessageCircle, question: t('q7'), answer: t('a7') },
   ]
 
   return (

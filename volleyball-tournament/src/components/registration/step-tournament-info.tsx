@@ -103,7 +103,7 @@
 //               <Calendar className="w-4 h-4 text-blue-400 flex-shrink-0" />
 //               <div>
 //                 <div className="text-[10px] text-gray-500">Date</div>
-//                 <div className="text-white text-xs font-medium">Ashoj 29 - Kartik 02, 2083</div>
+//                 <div className="text-white text-xs font-medium">Ashoj 29 - Kartik 01, 2083</div>
 //               </div>
 //             </div>
 
