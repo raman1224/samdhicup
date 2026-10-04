@@ -27,8 +27,8 @@ export default function TournamentPage() {
           <InfoRow label="Year" value="2083" />
           <InfoRow label="Status" value="Active" badge="bg-green-500/20 text-green-400" />
           <InfoRow label="Registration Fee" value="NPR 8,000" />
-          <InfoRow label="Prize Pool" value="NPR 1,40,000" />
-          <InfoRow label="Start Date" value="Ashoj 29, 2083" />
+          <InfoRow label="Prize Pool" value="NPR 1,60,000" />
+          <InfoRow label="Start Date" value="Ashoj 28, 2083" />
           <InfoRow label="End Date" value="Kartik 02, 2083" />
           <InfoRow label="Venue" value="Chauri Deurali, Kavrapalanchok" />
           <InfoRow label="Max Teams" value="32" />

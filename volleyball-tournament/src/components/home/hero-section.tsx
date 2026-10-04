@@ -53,7 +53,7 @@ export default function HeroSection() {
   const spotlightY = useTransform(mouseY, (y) => `${y}px`)
 
   const stats = [
-    { icon: Trophy, label: countdownT('prizePool'), value: 'रू 1,40,000+', color: 'text-yellow-400' },
+    { icon: Trophy, label: countdownT('prizePool'), value: 'रू 1,60,000+', color: 'text-yellow-400' },
     { icon: Users, label: countdownT('expectedTeams'), value: '32+', color: 'text-blue-400' },
     { icon: Calendar, label: countdownT('registrationCloses'), value: `${days}d ${hours}h ${minutes}m ${seconds}s`, color: 'text-green-400' },
   ]

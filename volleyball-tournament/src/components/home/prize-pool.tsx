@@ -22,16 +22,16 @@ const PrizePool = memo(function PrizePool() {
 
   useEffect(() => {
     if (isInView) {
-      animate(0, 80000, { duration: 2, onUpdate: (v) => winnerSpring.set(v) })
+      animate(0, 100000, { duration: 2, onUpdate: (v) => winnerSpring.set(v) })
       animate(0, 40000, { duration: 2, onUpdate: (v) => runnerSpring.set(v) })
       animate(0, 20000, { duration: 2, onUpdate: (v) => thirdSpring.set(v) })
     }
   }, [isInView, winnerSpring, runnerSpring, thirdSpring])
 
   const prizes = [
-    { icon: Crown, title: t('winner'), amount: 'रू 80,000', color: 'from-yellow-400 to-amber-600', bgColor: 'from-yellow-500/20 to-amber-500/20', borderColor: 'border-yellow-500/50', iconColor: 'text-yellow-400', extras: [t('goldTrophy'), t('goldMedals'), t('championshipCert')], spring: winnerSpring },
-    { icon: Medal, title: t('runnerUp'), amount: 'रू 40,000', color: 'from-gray-300 to-gray-500', bgColor: 'from-gray-500/20 to-slate-500/20', borderColor: 'border-gray-500/50', iconColor: 'text-gray-300', extras: [t('silverTrophy'), t('silverMedals'), t('runnerUpCert')], spring: runnerSpring },
-    { icon: Award, title: t('thirdPlace'), amount: 'रू 20,000', color: 'from-orange-400 to-orange-600', bgColor: 'from-orange-500/20 to-orange-600/20', borderColor: 'border-orange-500/50', iconColor: 'text-orange-400', extras: [t('bronzeTrophy'), t('bronzeMedals'), t('thirdPlaceCert')], spring: thirdSpring },
+    { icon: Crown, title: t('winner'), amount: 'रू 1,00,000', color: 'from-yellow-400 to-amber-600', bgColor: 'from-yellow-500/20 to-amber-500/20', borderColor: 'border-yellow-500/50', iconColor: 'text-yellow-400', extras: [t('goldTrophy'), t('goldMedals'), t('championshipCert')], spring: winnerSpring },
+    { icon: Medal, title: t('runnerUp'), amount: 'रू 40,000', color: 'from-gray-300 to-gray-500', bgColor: 'from-gray-500/20 to-slate-500/2₀', borderColor: 'border-gray-5₀/5₀', iconColor: 'text-gray-3₀', extras: [t('silverTrophy'), t('silverMedals'), t('runnerUpCert')], spring: runnerSpring },
+    { icon: Award, title: t('thirdPlace'), amount: 'रू 20,000', color: 'from-orange-400 to-orange-600', bgColor: 'from-orange-5₀/2₀ to-orange-6₀/2₀', borderColor: 'border-orange-5₀/5₀', iconColor: 'text-orange-4₀', extras: [t('bronzeTrophy'), t('bronzeMedals'), t('thirdPlaceCert')], spring: thirdSpring },
   ]
 
   const individualPrizes = [
@@ -47,7 +47,7 @@ const PrizePool = memo(function PrizePool() {
       <div className="container mx-auto px-4 relative z-10">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
           <Badge className="mb-4 px-6 py-2 text-lg bg-yellow-500/10 text-yellow-400 border-yellow-500/30"><Trophy className="w-4 h-4 mr-2" />{t('badge')}</Badge>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">{t('title')} <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent">रू 1,40,000</span></h2>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">{t('title')} <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent">रू 1,60,000</span></h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">{t('description')}</p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

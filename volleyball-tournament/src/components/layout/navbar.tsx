@@ -73,7 +73,7 @@ const Navbar = memo(function Navbar() {
           <div className="flex items-center justify-between h-14 md:h-20">
             <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
               <motion.div whileHover={{ scale: 1.1, rotate: 5 }} whileTap={{ scale: 0.95 }} className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex-shrink-0">
-                <Image src="/logo2.png" alt="Logo" fill className="object-contain" sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 56px" priority />
+                <Image src="/logo3.jpg" alt="Logo" fill className="object-contain" sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 56px" priority />
               </motion.div>
               <div className="hidden sm:block">
                 <h1 className="text-xs sm:text-sm md:text-base font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent whitespace-nowrap">
