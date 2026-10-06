@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
             <div style="white-space: pre-wrap; color: #333; line-height: 1.6;">${message}</div>
           </div>
           <div style="text-align: center; margin-top: 20px; color: #999; font-size: 12px;">
-            <p>📞 9803977546 | 📧 www.bishaltolami049@gmail.com</p>
+            <p>📞 9803977546 | 📧 nayabastisports.official@gmail.com</p>
             <p>Sent to ${recipientEmails.length} team(s)</p>
           </div>
         </div>

@@ -46,7 +46,7 @@ const Footer = memo(function Footer() {
             <p className="text-gray-400 text-sm mb-4">{t('description')}</p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-gray-400 text-sm"><Phone className="w-4 h-4 text-orange-400" /><span>9803977546</span></div>
-              <div className="flex items-center gap-2 text-gray-400 text-sm"><Mail className="w-4 h-4 text-orange-400" /><span>www.bishaltolami049@gmail.com</span></div>
+              <div className="flex items-center gap-2 text-gray-400 text-sm"><Mail className="w-4 h-4 text-orange-400" /><span>nayabastisports.official@gmail.com</span></div>
               <div className="flex items-center gap-2 text-gray-400 text-sm"><MapPin className="w-4 h-4 text-orange-400" /><span>{t('location')}</span></div>
             </div>
           </div>

@@ -35,7 +35,7 @@ const Contact = memo(function Contact() {
 
   const contactInfo = [
     { icon: Phone, label: t('phone'), value: '9803977546', description: t('phoneDesc'), color: 'text-green-400', bgColor: 'bg-green-500/10', borderColor: 'border-green-500/30' },
-    { icon: Mail, label: t('emailLabel'), value: 'www.bishaltolami049@gmail.com', description: t('emailDesc'), color: 'text-blue-400', bgColor: 'bg-blue-500/10', borderColor: 'border-blue-500/30' },
+    { icon: Mail, label: t('emailLabel'), value: 'nayabastisports.official@gmail.com', description: t('emailDesc'), color: 'text-blue-400', bgColor: 'bg-blue-500/10', borderColor: 'border-blue-500/30' },
     { icon: MapPin, label: t('location'), value: 'चाैरी  देउराली -०६, नयाँ बस्ती, काभ्रे', description: t('locationDesc'), color: 'text-red-400', bgColor: 'bg-red-500/10', borderColor: 'border-red-500/30' },
     { icon: Clock, label: t('hours'), value: '9 AM - 6 PM', description: t('hoursDesc'), color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30' },
   ]

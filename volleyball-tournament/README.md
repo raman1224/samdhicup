@@ -223,7 +223,7 @@ For support, contact:
 
 📱 Phone: 9803977546
 
-📧 Email: www.bishaltolami049@gmail.com
+📧 Email: nayabastisports.official@gmail.com
 
 Built with ❤️ in Nepal 🇳🇵
 

@@ -265,7 +265,7 @@
     "q6": "Does the organizer provide accommodation, transportation, or food?",
      "a6": "No. Teams and players are responsible for arranging their own accommodation, transportation/transportation costs, and meals during the tournament. These services are not provided by the organizer and are not included in the registration fee.",
     "q7": "How can I contact the organizers?",
-    "a7": "You can reach us via phone at 9803977546, email at www.bishaltolami049@gmail.com, or visit our office in Kathmandu. Working hours are 9 AM to 6 PM, Monday to Saturday."
+    "a7": "You can reach us via phone at 9803977546, email at nayabastisports.official@gmail.com, or visit our office in Kathmandu. Working hours are 9 AM to 6 PM, Monday to Saturday."
   },
 
   "footer": {
@@ -405,5 +405,13 @@
     "importantReminder": "⚠️ Important Reminder:",
     "esewaReminder": "After payment, copy the Transaction ID from your eSewa app and take a screenshot of the payment confirmation. You will need both in the next step!",
     "bankReminder": "After transferring, copy the Transaction Reference Number from your bank app and take a screenshot of the confirmation. You will need both in the next step!"
+  },
+    "winners": {
+    "badge": "Tournament Champions",
+    "title": "Meet the",
+    "highlight": "Winners",
+    "description": "Celebrating the best teams who conquered the court last season",
+    "congrats": "Congratulations to all champions and participants!"
   }
+
 }

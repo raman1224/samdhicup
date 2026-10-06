@@ -63,7 +63,7 @@ const FAQ = memo(function FAQ() {
             <p className="text-gray-400 mb-4">{t('stillHaveDesc')}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:9803977546" className="text-purple-400 hover:text-purple-300 font-semibold">{t('callUs')}</a>
-              <a href="mailto:www.bishaltolami049@gmail.com" className="text-purple-400 hover:text-purple-300 font-semibold">{t('emailUs')}</a>
+              <a href="mailto:nayabastisports.official@gmail.com" className="text-purple-400 hover:text-purple-300 font-semibold">{t('emailUs')}</a>
             </div>
           </CardContent></Card>
         </motion.div>

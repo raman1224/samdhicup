@@ -59,7 +59,9 @@ export const ModelName = {
   OTP: 'OTP',
   Announcement: 'Announcement',
   AuditLog: 'AuditLog',
-  RateLimit: 'RateLimit'
+  RateLimit: 'RateLimit',
+  Match: 'Match',
+  TournamentResult: 'TournamentResult'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -220,6 +222,45 @@ export const RateLimitScalarFieldEnum = {
 } as const
 
 export type RateLimitScalarFieldEnum = (typeof RateLimitScalarFieldEnum)[keyof typeof RateLimitScalarFieldEnum]
+
+
+export const MatchScalarFieldEnum = {
+  id: 'id',
+  matchNumber: 'matchNumber',
+  round: 'round',
+  date: 'date',
+  time: 'time',
+  teamAName: 'teamAName',
+  teamBName: 'teamBName',
+  teamAScore: 'teamAScore',
+  teamBScore: 'teamBScore',
+  winner: 'winner',
+  venue: 'venue',
+  status: 'status',
+  notes: 'notes',
+  tournamentId: 'tournamentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+
+
+export const TournamentResultScalarFieldEnum = {
+  id: 'id',
+  position: 'position',
+  positionLabel: 'positionLabel',
+  teamName: 'teamName',
+  teamId: 'teamId',
+  medalType: 'medalType',
+  prizeAmount: 'prizeAmount',
+  notes: 'notes',
+  tournamentId: 'tournamentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TournamentResultScalarFieldEnum = (typeof TournamentResultScalarFieldEnum)[keyof typeof TournamentResultScalarFieldEnum]
 
 
 export const SortOrder = {

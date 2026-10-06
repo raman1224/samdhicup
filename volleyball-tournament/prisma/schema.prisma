@@ -40,6 +40,9 @@ model Tournament {
   updatedAt     DateTime  @updatedAt
   teams         Team[]
   announcements Announcement[]
+    matches       Match[]
+  results       TournamentResult[]
+
 }
 
 model Team {
@@ -145,4 +148,46 @@ model RateLimit {
   expiresAt DateTime
 
   @@index([key])
+}
+
+model Match {
+  id            String    @id @default(cuid())
+  matchNumber   Int       @unique
+  round         String    // "Group Stage", "Quarter Final", "Semi Final", "Final", "3rd Place"
+  date          DateTime  // Match date
+  time          String    // "9:00 AM"
+  teamAName     String
+  teamBName     String
+  teamAScore    Int?
+  teamBScore    Int?
+  winner        String?   // "team_a", "team_b", "draw", null for upcoming
+  venue         String?   @default("चउरी देउराली, नयाँ बस्ती")
+  status        String    @default("upcoming") // "upcoming", "live", "completed", "cancelled"
+  notes         String?
+  tournamentId  String
+  tournament    Tournament @relation(fields: [tournamentId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([tournamentId])
+  @@index([date])
+  @@index([status])
+}
+
+model TournamentResult {
+  id            String    @id @default(cuid())
+  position      Int
+  positionLabel String
+  teamName      String
+  teamId        String?
+  medalType     String
+  prizeAmount   Int?
+  notes         String?
+  tournamentId  String
+  tournament    Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([tournamentId])
+  @@unique([tournamentId, position])
 }

@@ -11,7 +11,7 @@ import { toast } from 'sonner'
 export default function SettingsPage() {
   const [fee, setFee] = useState('8000')
   const [phone, setPhone] = useState('9803977546')
-  const [email, setEmail] = useState('www.bishaltolami049@gmail.com')
+  const [email, setEmail] = useState('nayabastisports.official@gmail.com')
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault()

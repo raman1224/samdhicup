@@ -7,12 +7,16 @@ import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { 
   LayoutDashboard, Users, CreditCard, Mail, 
-  Settings, LogOut, Trophy, X, Lock, Home
+  Settings, LogOut, Trophy, X, Lock, Home,
+  Medal,
+  Calendar
 } from 'lucide-react'
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/admin/dashboard' },
   { icon: Trophy, label: 'Tournament', href: '/admin/dashboard/tournament' },
+    { icon: Calendar, label: 'Match Schedule', href: '/admin/dashboard/schedule' },
+  { icon: Medal, label: 'Results', href: '/admin/dashboard/results' },
   { icon: Users, label: 'Teams', href: '/admin/dashboard/teams' },
   { icon: CreditCard, label: 'Payments', href: '/admin/dashboard/payments' },
   { icon: Mail, label: 'Emails', href: '/admin/dashboard/emails' },

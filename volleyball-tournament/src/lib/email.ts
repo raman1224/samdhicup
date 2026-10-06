@@ -67,7 +67,7 @@
 //             <div style="background: #374151; padding: 12px; border-radius: 8px; margin: 12px 0;">
 //               <p style="color: #F97316; font-size: 20px; font-weight: bold; margin: 0;">${registrationId}</p>
 //             </div>
-//             <p style="color: #9CA3AF; font-size: 14px;">📞 9803977546 | 📧 www.bishaltolami049@gmail.com</p>
+//             <p style="color: #9CA3AF; font-size: 14px;">📞 9803977546 | 📧 nayabastisports.official@gmail.com</p>
 //           </div>
 //         </div>
 //       `,
@@ -155,7 +155,7 @@ export async function sendRegistrationEmail(email: string, teamName: string, reg
             <div style="background: #374151; padding: 12px; border-radius: 8px; margin: 12px 0;">
               <p style="color: #F97316; font-size: 20px; font-weight: bold; margin: 0;">${registrationId}</p>
             </div>
-            <p style="color: #9CA3AF; font-size: 14px;">📞 9803977546 | 📧 www.bishaltolami049@gmail.com</p>
+            <p style="color: #9CA3AF; font-size: 14px;">📞 9803977546 | 📧 nayabastisports.official@gmail.com</p>
           </div>
         </div>
       `,

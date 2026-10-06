@@ -86,3 +86,13 @@ export type AuditLog = Prisma.AuditLogModel
  * 
  */
 export type RateLimit = Prisma.RateLimitModel
+/**
+ * Model Match
+ * 
+ */
+export type Match = Prisma.MatchModel
+/**
+ * Model TournamentResult
+ * 
+ */
+export type TournamentResult = Prisma.TournamentResultModel

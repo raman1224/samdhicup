@@ -136,7 +136,7 @@ export async function GET(
   </div>
 
   <div class="footer">
-    Volleyball Tournament 2026 | National Stadium, Kathmandu | Contact: 9803977546 | www.bishaltolami049@gmail.com
+    Volleyball Tournament 2026 | National Stadium, Kathmandu | Contact: 9803977546 | nayabastisports.official@gmail.com
   </div>
 </body>
 </html>`

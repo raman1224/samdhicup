@@ -149,7 +149,7 @@ export default function SuccessContent() {
         >
           <div className="flex items-center justify-center gap-2 text-gray-400">
             <Mail className="w-4 h-4" />
-            <span>www.bishaltolami049@gmail.com</span>
+            <span>nayabastisports.official@gmail.com</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-gray-400">
             <Phone className="w-4 h-4" />

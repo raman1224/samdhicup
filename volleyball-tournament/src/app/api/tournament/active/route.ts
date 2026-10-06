@@ -26,7 +26,7 @@ const tournamentData = {
   ],
   contacts: {
     phone: '9803977546',
-    email: 'www.bishaltolami049@gmail.com',
+    email: 'nayabastisports.official@gmail.com',
   },
 }
 

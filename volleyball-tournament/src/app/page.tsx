@@ -10,17 +10,18 @@ const TournamentDetails = dynamic(
   () => import("@/components/home/tournament-details"),
   { loading: () => <LoadingSkeleton height="400px" /> }
 );
-
 const PrizePool = dynamic(() => import("@/components/home/prize-pool"), {
   loading: () => <LoadingSkeleton height="400px" />,
 });
+const Schedule = dynamic(() => import('@/components/home/schedule'), {
+  loading: () => <LoadingSkeleton height="500px" />,
+})
+const Winners = dynamic(() => import('@/components/home/winners'), {
+  loading: () => <LoadingSkeleton height="400px" />,
+})
 
 const Sponsors = dynamic(() => import("@/components/home/sponsors"), {
   loading: () => <LoadingSkeleton height="300px" />,
-});
-
-const Schedule = dynamic(() => import("@/components/home/schedule"), {
-  loading: () => <LoadingSkeleton height="400px" />,
 });
 
 const RegistrationInfo = dynamic(
@@ -57,15 +58,20 @@ export default function HomePage() {
       <Suspense fallback={<LoadingSkeleton height="400px" />}>
         <TournamentDetails />
       </Suspense>
-      <Suspense fallback={<LoadingSkeleton height="400px" />}>
+       <Suspense fallback={<LoadingSkeleton height="400px" />}>
         <PrizePool />
       </Suspense>
+        <Suspense fallback={<LoadingSkeleton height="400px" />}>
+        <Schedule />
+      </Suspense>
+        <Suspense fallback={<LoadingSkeleton height="400px" />}>
+        <Winners />
+      </Suspense>
+     
       <Suspense fallback={<LoadingSkeleton height="300px" />}>
         <Sponsors />
       </Suspense>
-      <Suspense fallback={<LoadingSkeleton height="400px" />}>
-        <Schedule />
-      </Suspense>
+    
       <Suspense fallback={<LoadingSkeleton height="600px" />}>
         <RegistrationInfo />
       </Suspense>

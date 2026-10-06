@@ -17,7 +17,7 @@
 //     // Send notification to admin email
 //     await resend.emails.send({
 //       from: 'Contact Form <onboarding@resend.dev>',
-//       to: ['www.bishaltolami049@gmail.com'], // Your email - gets all contact messages
+//       to: ['nayabastisports.official@gmail.com'], // Your email - gets all contact messages
 //       subject: `📩 New Contact Message from ${name}`,
 //       html: `
 //         <div style="font-family: Arial, sans-serif; max-width: 500px; padding: 20px;">

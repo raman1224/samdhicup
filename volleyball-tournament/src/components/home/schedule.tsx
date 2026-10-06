@@ -1,63 +1,184 @@
 'use client'
 
-import { memo, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { memo, useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Calendar, Clock, MapPin, Trophy, Circle } from 'lucide-react'
+import { Calendar, Clock, MapPin, Trophy, Loader2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
 const Schedule = memo(function Schedule() {
   const t = useTranslations('schedule')
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [matches, setMatches] = useState<any[]>([])
+  const [results, setResults] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const timeline = [
-    { phase: t('phase1'), title: t('registrationOpens'), date: 'Bhadra 02, 2083', time: '9:00 AM', description: t('regOpensDesc'), status: t('status'), color: 'text-blue-400', bgColor: 'bg-blue-500/10', borderColor: 'border-blue-500/30', icon: Calendar },
-    { phase: t('phase2'), title: t('registrationCloses'), date: 'Ashoj 27, 2083', time: '11:59 PM', description: t('regClosesDesc'), status: t('status'), color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30', icon: Clock },
-    { phase: t('phase3'), title: t('fixtureAnnouncement'), date: 'Ashoj 28, 2083', time: '12:00 PM', description: t('fixtureDesc'), status: t('status'), color: 'text-purple-400', bgColor: 'bg-purple-500/10', borderColor: 'border-purple-500/30', icon: Trophy },
-    { phase: t('phase4'), title: t('openingCeremony'), date: 'Ashoj 28, 2083', time: '9:00 AM', description: t('openingDesc'), status: t('status'), color: 'text-orange-400', bgColor: 'bg-orange-500/10', borderColor: 'border-orange-500/30', icon: MapPin },
-    { phase: t('phase5'), title: t('groupStage'), date: 'Ashoj 29, 2083', time: '9:00 AM - 6:00 PM', description: t('groupDesc'), status: t('status'), color: 'text-green-400', bgColor: 'bg-green-500/10', borderColor: 'border-green-500/30', icon: Circle },
-    { phase: t('phase6'), title: t('knockoutStage'), date: 'Ashoj 30, 2083', time: '9:00 AM - 6:00 PM', description: t('knockoutDesc'), status: t('status'), color: 'text-red-400', bgColor: 'bg-red-500/10', borderColor: 'border-red-500/30', icon: Circle },
-    { phase: t('phase7'), title: t('finals'), date: 'Ashoj 31, 2083', time: '10:00 AM - 5:00 PM', description: t('finalsDesc'), status: t('status'), color: 'text-yellow-400', bgColor: 'bg-yellow-500/10', borderColor: 'border-yellow-500/30', icon: Trophy },
-  ]
+  useEffect(() => {
+    fetch('/api/matches')
+      .then(r => r.json())
+      .then(d => {
+        if (d.success) {
+          setMatches(d.matches || [])
+          setResults(d.results || [])
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [])
+
+  // Group by date
+  const groupedByDate = matches.reduce((acc: any, match: any) => {
+    const dateKey = new Date(match.date).toLocaleDateString('en-US', { 
+      month: 'short', day: 'numeric', year: 'numeric' 
+    })
+    if (!acc[dateKey]) acc[dateKey] = []
+    acc[dateKey].push(match)
+    return acc
+  }, {})
 
   return (
-    <section ref={ref} id="schedule" className="py-20 relative overflow-hidden">
+    <section id="schedule" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-gray-800 to-gray-900" />
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="text-center mb-16">
-          <Badge className="mb-4 px-6 py-2 text-lg bg-cyan-500/10 text-cyan-400 border-cyan-500/30"><Calendar className="w-4 h-4 mr-2" />{t('badge')}</Badge>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">{t('title')} <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">{t('highlight')}</span></h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">{t('description')}</p>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <Badge className="mb-4 px-6 py-2 text-lg bg-cyan-500/10 text-cyan-400 border-cyan-500/30">
+            <Calendar className="w-4 h-4 mr-2" />
+            Match Schedule
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Tournament Timeline
+          </h2>
         </motion.div>
-        <div className="relative">
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-orange-500/50 via-purple-500/50 to-blue-500/50 transform md:-translate-x-px" />
-          <div className="space-y-8">
-            {timeline.map((event, index) => (
-              <motion.div key={event.phase} initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: index * 0.1 }} className={`flex items-start gap-6 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                <div className="relative flex items-center justify-center flex-shrink-0">
-                  <motion.div className={`w-8 h-8 rounded-full ${event.bgColor} border-2 ${event.borderColor} flex items-center justify-center z-10`} whileHover={{ scale: 1.3 }} animate={{ boxShadow: ['0 0 0 0 rgba(249,115,22,0.4)', '0 0 0 10px rgba(249,115,22,0)', '0 0 0 0 rgba(249,115,22,0.4)'] }} transition={{ duration: 2, repeat: Infinity }}><event.icon className={`w-4 h-4 ${event.color}`} /></motion.div>
+
+        {loading ? (
+          <div className="flex justify-center py-12">
+            <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
+          </div>
+        ) : matches.length === 0 ? (
+          <Card className="bg-gray-800/50 border-gray-700 max-w-2xl mx-auto">
+            <CardContent className="py-12 text-center">
+              <Calendar className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+              <h3 className="text-white text-xl font-bold mb-2">
+                Schedule Coming Soon
+              </h3>
+              <p className="text-gray-400">
+                Detailed match schedule will be published after registration closes
+              </p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="space-y-8 max-w-4xl mx-auto">
+            {Object.entries(groupedByDate).map(([date, dayMatches]: [string, any]) => (
+              <div key={date}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="px-4 py-1.5 bg-orange-500/20 border border-orange-500/30 rounded-full">
+                    <span className="text-orange-400 font-bold text-sm">{date}</span>
+                  </div>
+                  <div className="h-px flex-1 bg-gradient-to-r from-orange-500/30 to-transparent" />
                 </div>
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                  <motion.div whileHover={{ scale: 1.02 }} transition={{ type: 'spring', stiffness: 300 }}>
-                    <Card className={`${event.bgColor} ${event.borderColor} border`}><CardContent className="p-6">
-                      <div className="flex items-center gap-2 mb-3"><Badge className={event.bgColor}>{event.phase}</Badge><span className="text-xs text-gray-400">● {event.status}</span></div>
-                      <h3 className="text-xl font-bold text-white mb-2">{event.title}</h3>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-400 mb-3"><span className="flex items-center gap-1"><Calendar className="w-4 h-4" />{event.date}</span><span className="flex items-center gap-1"><Clock className="w-4 h-4" />{event.time}</span></div>
-                      <p className="text-gray-300">{event.description}</p>
-                    </CardContent></Card>
-                  </motion.div>
+
+                <div className="space-y-2">
+                  {dayMatches.map((match: any) => (
+                    <motion.div
+                      key={match.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                    >
+                      <Card className="bg-gray-800/50 border-gray-700 hover:border-orange-500/30 transition-colors">
+                        <CardContent className="p-3 sm:p-4">
+                          <div className="flex items-center gap-2 sm:gap-4">
+                            <div className="flex-shrink-0 text-center min-w-[50px]">
+                              <div className="text-[10px] text-gray-500">MATCH</div>
+                              <div className="text-lg font-bold text-orange-400">#{match.matchNumber}</div>
+                            </div>
+                            
+                            <div className="flex-1 flex items-center gap-2 min-w-0">
+                              <div className={`flex-1 text-right ${match.winner === 'team_a' ? 'text-green-400 font-bold' : 'text-white'}`}>
+                                <span className="text-sm truncate block">{match.teamAName}</span>
+                              </div>
+                              <div className="text-xs text-gray-500 px-1">vs</div>
+                              <div className={`flex-1 ${match.winner === 'team_b' ? 'text-green-400 font-bold' : 'text-white'}`}>
+                                <span className="text-sm truncate block">{match.teamBName}</span>
+                              </div>
+                            </div>
+
+                            {(match.teamAScore !== null && match.teamBScore !== null) && (
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                <span className="text-xl font-bold text-white">{match.teamAScore}</span>
+                                <span className="text-gray-500">-</span>
+                                <span className="text-xl font-bold text-white">{match.teamBScore}</span>
+                              </div>
+                            )}
+
+                            <div className="hidden sm:flex flex-col items-end text-xs text-gray-400 flex-shrink-0">
+                              <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {match.time}</span>
+                              <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {match.venue?.split(',')[0]}</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </div>
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.8 }} className="mt-12 text-center">
-          <Card className="inline-block bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30"><CardContent className="p-6"><Calendar className="w-10 h-10 text-cyan-400 mx-auto mb-3" /><h3 className="text-xl font-bold text-white mb-2">{t('comingSoon')}</h3><p className="text-gray-400">{t('comingSoonDesc')}</p></CardContent></Card>
-        </motion.div>
+        )}
+
+        {/* Winner Section */}
+        {results.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16 max-w-4xl mx-auto"
+          >
+            <h3 className="text-3xl font-bold text-center text-white mb-8">
+              🏆 Tournament Champions
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {results.map((result: any, i: number) => (
+                <motion.div
+                  key={result.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={i === 0 ? 'md:order-2 md:scale-110' : i === 1 ? 'md:order-1' : 'md:order-3'}
+                >
+                  <Card className={`text-center p-6 ${
+                    result.medalType === 'gold' ? 'bg-gradient-to-b from-yellow-500/20 to-orange-500/10 border-yellow-500/40' :
+                    result.medalType === 'silver' ? 'bg-gradient-to-b from-gray-400/20 to-gray-500/10 border-gray-400/40' :
+                    'bg-gradient-to-b from-orange-600/20 to-red-500/10 border-orange-600/40'
+                  } border`}>
+                    <div className="text-5xl mb-3">
+                      {result.medalType === 'gold' ? '🥇' : result.medalType === 'silver' ? '🥈' : '🥉'}
+                    </div>
+                    <div className={`text-3xl font-bold mb-2 ${
+                      result.medalType === 'gold' ? 'text-yellow-400' :
+                      result.medalType === 'silver' ? 'text-gray-300' : 'text-orange-400'
+                    }`}>
+                      {result.positionLabel}
+                    </div>
+                    <div className="text-xl font-bold text-white mb-1">{result.teamName}</div>
+                    {result.prizeAmount && (
+                      <div className="text-green-400 font-semibold">रू {result.prizeAmount.toLocaleString()}</div>
+                    )}
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   )
 })
+
 export default Schedule
