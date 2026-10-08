@@ -1,11 +1,10 @@
-
 'use client'
 
 import { memo, useRef, useEffect, useState, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Heart, Star, Shield, Sparkles } from 'lucide-react'
+import { Heart, Star, Shield, Sparkles, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
@@ -19,9 +18,16 @@ const Sponsors = memo(function Sponsors() {
       name: 'Chaurideurali Rural Municipality',
       role: 'Title Sponsor',
       logo: '/partners/chaurideurali.jpg',
+      link: null, // no link for this one
     },
-    // { name: 'Volleyball Association', role: 'Organizing Partner', logo: '/partners/va.png' },
-    // { name: 'Sports Authority', role: 'Government Partner', logo: '/partners/sports.png' },
+    {
+      name: 'Yuwa Daily',
+      role: 'Media Partner',
+      logo: '/partners/media.jpg',
+      link: 'https://www.yuwadaily.com', 
+    },
+    // { name: 'Volleyball Association', role: 'Organizing Partner', logo: '/partners/va.png', link: null },
+    // { name: 'Sports Authority', role: 'Government Partner', logo: '/partners/sports.png', link: 'https://example.com' },
   ]
 
   const getTierColor = (tier: string) => {
@@ -110,57 +116,100 @@ const Sponsors = memo(function Sponsors() {
             {t('ourPartners')}
           </h3>
 
+          {/* Fixed uniform grid - all cards same height */}
           <div className={`grid gap-6 ${
             partners.length === 1 ? 'grid-cols-1 max-w-md mx-auto' :
-            partners.length === 2 ? 'grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto' :
-            partners.length === 3 ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-4xl mx-auto' :
+            partners.length === 2 ? 'grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto' :
+            partners.length === 3 ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto' :
             'grid-cols-2 md:grid-cols-4'
           }`}>
-            {partners.map((partner, index) => (
-              <motion.div
-                key={partner.name}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.8 + index * 0.15 }}
-                whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.3, type: 'spring', stiffness: 300 } }}
-                className="group"
-              >
-                <Card className="relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 border-gray-700/50 hover:border-orange-500/40 transition-all duration-500 overflow-hidden backdrop-blur-sm">
-                  <CardContent className="p-8 text-center relative">
-                    {/* Shine sweep on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+            {partners.map((partner, index) => {
+              const CardWrapper = partner.link ? 'a' : 'div'
+              const linkProps = partner.link
+                ? {
+                    href: partner.link,
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  }
+                : {}
 
-                    {/* Big Logo - no border */}
-                    <div className="relative w-32 h-32 sm:w-36 sm:h-36 mx-auto mb-5">
-                      {partner.logo ? (
-                        <Image
-                          src={partner.logo}
-                          alt={partner.name}
-                          fill
-                          className="object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-500"
-                          sizes="(max-width: 640px) 128px, 144px"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Shield className="w-20 h-20 text-orange-400" />
+              return (
+                <motion.div
+                  key={partner.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.15 }}
+                  whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3, type: 'spring', stiffness: 300 } }}
+                  className="group h-full"
+                >
+                  {/* @ts-ignore */}
+                  <CardWrapper
+                    {...linkProps}
+                    className="block h-full cursor-pointer"
+                  >
+                    <Card className="relative bg-gradient-to-br from-gray-800/60 to-gray-900/60 border-gray-700/50 hover:border-orange-500/40 transition-all duration-500 overflow-hidden backdrop-blur-sm h-full flex flex-col">
+                      {/* Fixed height card */}
+                      <CardContent className="p-6 sm:p-8 text-center relative flex flex-col items-center justify-between flex-1 min-h-[380px] sm:min-h-[420px]">
+                        {/* Shine sweep on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+
+                        {/* Big Logo - uniform container */}
+                        <div className="relative w-full flex-1 flex items-center justify-center min-h-[180px] sm:min-h-[220px]">
+                          {partner.logo ? (
+                            <div className="relative w-48 h-48 sm:w-56 sm:h-56">
+                              <Image
+                                src={partner.logo}
+                                alt={partner.name}
+                                fill
+                                className="object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
+                                sizes="(max-width: 640px) 192px, 224px"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <Shield className="w-24 h-24 text-orange-400" />
+                            </div>
+                          )}
+
+                          {/* External link icon on hover (only if has link) */}
+                          {partner.link && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.8 }}
+                              whileHover={{ opacity: 1, scale: 1 }}
+                              className="absolute top-2 right-2 p-2 rounded-full bg-orange-500/20 border border-orange-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            >
+                              <ExternalLink className="w-4 h-4 text-orange-400" />
+                            </motion.div>
+                          )}
                         </div>
-                      )}
-                    </div>
 
-                    {/* Partner Name */}
-                    <h4 className="text-white font-bold text-base sm:text-lg mb-2 group-hover:text-orange-400 transition-colors">
-                      {partner.name}
-                    </h4>
+                        {/* Bottom content - fixed position */}
+                        <div className="w-full space-y-3 mt-4">
+                          {/* Partner Name - fixed 2-line height */}
+                          <h4 className="text-white font-bold text-base sm:text-lg group-hover:text-orange-400 transition-colors flex items-center justify-center min-h-[48px] sm:min-h-[56px] leading-tight px-2">
+                            {partner.name}
+                          </h4>
 
-                    {/* Role Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30">
-                      <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
-                      <p className="text-orange-400 text-xs font-medium">{partner.role}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                          {/* Role Badge */}
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30">
+                            <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
+                            <p className="text-orange-400 text-xs font-medium">{partner.role}</p>
+                          </div>
+
+                          {/* Visit website hint (only if has link) */}
+                          {partner.link && (
+                            <p className="text-gray-500 text-[10px] flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <ExternalLink className="w-3 h-3" />
+                              Click to visit
+                            </p>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CardWrapper>
+                </motion.div>
+              )
+            })}
           </div>
         </motion.div>
 
